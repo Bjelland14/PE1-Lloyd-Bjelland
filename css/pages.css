@@ -1,0 +1,40 @@
+/* === Product Page === */
+
+.product-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.product-image {
+  flex: 1 1 40%;
+}
+
+.product-info {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.price s {
+  color: #777;
+}
+
+.tags span {
+  background: #eee;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.reviews {
+  margin-top: 3rem;
+}
+
+.reviews li {
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 0;
+}
