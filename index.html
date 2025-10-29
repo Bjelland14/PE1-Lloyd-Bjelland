@@ -9,33 +9,53 @@
         <link rel="stylesheet" href="./css/components.css">
         <link rel="stylesheet" href="./css/pages.css">
     </head>
-<body>
-    <header class="container">
-        <a class="logo" href="./assets/">STAV</a>
-        <nav>
+
+    <body>
+<header class="site-header">
+    <div class="container">
+        <a class="logo" href="./">
+            <img src="./assets/STAVLOGO.png" alt="STAV" height="36">
+        </a>
+        <nav class="site-nav">
             <a href="./account/login.html">Login</a>
             <a href="./account/register.html">Register</a>
+            <a href="./cart.html" aria-label="Cart">Cart</a>
         </nav>
-    </header>
+    </div>
+</header>
 
+<main class="container">
 
-    <main class="container">
-        <section>
-            <h2>Latest</h2>
-            <div id="carousel"></div>
-        </section>
+<section class="categories" aria-labelledby="cat-tittle">
+    <h2 id="cat-title">Shop by category</h2>
+    <div id="category-row" class="category-row">
 
-        <section>
-            <h2>Products</h2>
-            <div id="status" role="status">Loading...</div>
-            <div id="products-grid" class="grid"></div>
-        </section>
+    </div>
+</section>
 
-        <footer class="container"><small>STAV</small></footer>
+<section>
+    <h2>Latest</h2>
+    <div id="carousel"></div>
+</section>
+
+<section>
+    <h2>Products</h2>
+    <div id="status" role="status">Loading...</div>
+    <div id="products-grid" class="grid"></div>
+</section>
+</main>
+
+<footer class="siter-footer">
+    <div class="container footer-inner">
+        <small>&copy STAV</small>
+        <nav class="footer-nav">
+            <a href="./index.html">Home</a>
+            <a href="./account/login.html">Account</a>
+            <a href="./cart.html">Cart</a>
+        </nav>
+    </div>
+</footer>
+
         <script type="module" src="./js/home.js"></script>
-    </main>
-</body>
-
-
-
+    </body>
 </html>
