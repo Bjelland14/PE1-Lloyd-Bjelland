@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>STAV - CART</title>
+        <link rel="stylesheet" href="./css/base.css">
+        <link rel="stylesheet" href="./css/layout.css">
+        <link rel="stylesheet" href="./css/components.css">
+        <link rel="stylesheet" href="./css/pages.css">
+    </head>
+
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <a class="logo" href="./">
+                    <img src="./assets/STAVLOGO.png" alt="STAV" height="36">
+                </a>
+                <nav class="site-nav">
+                    <a href="./account/login.html">Login</a> 
+                    <a href="./account/register.html">Register</a>
+                    <a href="./cart.html">Cart</a>
+                </nav>
+            </div>
+        </header>
+
+<main class="container">
+    <h1>Your Cart</h1>
+    <div id="cart-status" role="status"></div>
+
+<section id="cart-list" class="cart-list"></section>
+
+<section id="cart-summary" class="cart-summary">
+    <div class="totals">
+          <p>Items: <span id="cart-count">0</span></p>
+          <p><strong>Total:</strong> <span id="cart-total">0.00 NOK</span></p>
+    </div>
+    <div class="actions">
+        <button id="clear-cart" class="danger">Clear cart</button>
+        <a href="./checkout.html" class="primary btn-link" id="to-checkout">Checkout</a>
+    </div>
+</section>
+</main>
+
+<footer class="siter-footer">
+    <div class="container footer-inner">
+        <small>&copy STAV</small>
+        <nav class="footer-nav">
+            <a href="./index.html">Home</a>
+            <a href="./account/login.html">Account</a>
+            <a href="./cart.html">Cart</a>
+        </nav>
+    </div>
+</footer>
+
+        <script type="module" src="./js/cart.js"></script>
+    </body>
+</html>
