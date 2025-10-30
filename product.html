@@ -9,27 +9,39 @@
         <link rel="stylesheet" href="./css/components.css">
         <link rel="stylesheet" href="./css/pages.css">
     </head>
-    <body>        
-        <header class="container">
-        <a class="logo" href="./assets/STAVlogo.png">STAV</a>
-        <nav>
+    
+    
+<body>        
+    <header class="site-header">
+        <div class="container">
+       <a class="logo" href="./">
+            <img src="./assets/STAVLOGO.png" alt="STAV" height="36">
+        </a>
+        <nav class="site-nav">
             <a href="./account/login.html">Login</a>
             <a href="./account/register.html">Register</a>
+            <a href="./cart.html">Cart</a>
         </nav>
-    </header>
+    </div>    
+</header>       
 
+<main class="container">
+    <section id="product-detail" class="product-detail">
+        <div id="status" role="status">Loading product...</div>
+    </section>
+</main>
 
-    <main class="container">
-        <div id="status" role="status">Loading product....</div>
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <small>&copy; STAV</small>
+        <nav class="footer-nav">
+            <a href="./index.html">Home</a>
+            <a href="./account/login.html">Account</a>
+            <a href="./cart.html">Cart</a>
+        </nav>
+    </div>
+</footer>
 
-        <section id="product-container" class="product-details">
-
-        </section>
-        
-        <footer class="container">
-            <p>© 2025 STAV</p></p>
-        </footer>
         <script type="module" src="./js/product.js"></script>
-    </main>
-</body>
+    </body>
 </html>
