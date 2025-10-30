@@ -1,61 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>STAV - HOME</title>
-        <link rel="stylesheet" href="./css/base.css">
-        <link rel="stylesheet" href="./css/layout.css">
-        <link rel="stylesheet" href="./css/components.css">
-        <link rel="stylesheet" href="./css/pages.css">
-    </head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>STAV – Home</title>
 
-    <body>
-<header class="site-header">
-    <div class="container">
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/components.css" />
+    <link rel="stylesheet" href="./css/pages.css" />
+  </head>
+
+  <body>
+
+    <header class="site-header">
+      <div class="container">
         <a class="logo" href="./">
-            <img src="./assets/STAVLOGO.png" alt="STAV" height="36">
+          <img src="./assets/STAVLOGO.png" alt="STAV" height="36" />
         </a>
         <nav class="site-nav">
-            <a href="./account/login.html">Login</a>
-            <a href="./account/register.html">Register</a>
-            <a href="./cart.html" aria-label="Cart">Cart</a>
+          <a href="./account/login.html">Login</a>
+          <a href="./account/register.html">Register</a>
+          <a href="./cart.html" aria-label="Cart">Cart</a>
         </nav>
-    </div>
-</header>
+      </div>
+    </header>
 
-<main class="container">
+    <main class="container">
 
-<section class="categories" aria-labelledby="cat-tittle">
-    <h2 id="cat-title">Shop by category</h2>
-    <div id="category-row" class="category-row">
+        <section class="hero" aria-label="Featured">
+        <div id="hero-carousel" class="carousel">
+          <button class="nav prev" aria-label="Previous slide">‹</button>
+          <div class="track" id="carousel-track"></div>
+          <button class="nav next" aria-label="Next slide">›</button>
+          <div class="dots" id="carousel-dots"></div>
+        </div>
+      </section>
 
-    </div>
-</section>
+      <section class="categories" aria-labelledby="cat-title">
+        <h2 id="cat-title">Shop by Category</h2>
+        <div id="category-row" class="category-row">
 
-<section>
-    <h2>Latest</h2>
-    <div id="carousel"></div>
-</section>
+        </div>
+      </section>
 
-<section>
-    <h2>Products</h2>
-    <div id="status" role="status">Loading...</div>
-    <div id="products-grid" class="grid"></div>
-</section>
-</main>
+      <section class="products">
+        <h2>New Arrivals</h2>
+        <div id="status" role="status">Loading...</div>
+        <div id="products-grid" class="grid"></div>
+      </section>
+    </main>
 
-<footer class="siter-footer">
-    <div class="container footer-inner">
-        <small>&copy STAV</small>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <small>&copy; 2025 STAV</small>
         <nav class="footer-nav">
-            <a href="./index.html">Home</a>
-            <a href="./account/login.html">Account</a>
-            <a href="./cart.html">Cart</a>
+          <a href="./index.html">Home</a>
+          <a href="./account/login.html">Account</a>
+          <a href="./cart.html">Cart</a>
         </nav>
-    </div>
-</footer>
+      </div>
+    </footer>
 
-        <script type="module" src="./js/home.js"></script>
-    </body>
+    <!-- JS -->
+    <script type="module" src="./js/home.js"></script>
+  </body>
 </html>
