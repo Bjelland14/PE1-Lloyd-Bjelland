@@ -1,73 +1,123 @@
 .product {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.1fr 1fr;
   gap: 2rem;
-  margin-top: 2rem;
+  margin: 2rem 0;
+  align-items: start;
 }
 
 .product-image img {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 14px;
   object-fit: cover;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
 .product-info h1 {
   margin-bottom: 0.5rem;
+  font-size: 1.9rem;
+}
+
+.product-info p {
+  line-height: 1.6;
+  color: #333;
 }
 
 .product .price {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin: 1rem 0;
+  font-weight: 600;
 }
 
 .actions {
   display: flex;
   gap: 0.75rem;
-  margin: 1rem 0 0.5rem;
+  margin: 1.5rem 0;
 }
 
 button.primary {
   background-color: #a2d2ff;
   color: #1e1e1e;
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 1.6rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
-button.primary:hover { background-color: #91c4f2; }
+button.primary:hover {
+  background-color: #91c4f2;
+  transform: translateY(-2px);
+}
 
 button.secondary {
   background: transparent;
   color: #1e1e1e;
   border: 2px solid #1e1e1e;
-  padding: 0.65rem 1.25rem;
-  border-radius: 6px;
+  padding: 0.75rem 1.4rem;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 button.secondary:hover {
   background: #1e1e1e;
   color: #fff;
+  transform: translateY(-2px);
+}
+
+.tags {
+  margin: 1rem 0;
 }
 
 .tags span {
-  background: #f0f0f0;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
+  background: #f0f2f6;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
   margin-right: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: #333;
 }
 
 .reviews {
   margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #ccc;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
 }
-.reviews li { padding: 0.75rem 0; border-bottom: 1px solid #eee; }
+
+.reviews h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.reviews ul {
+  list-style: none;
+  padding: 0;
+}
+
+.reviews li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.reviews li strong {
+  display: inline-block;
+  margin-bottom: 0.3rem;
+}
 
 @media (max-width: 900px) {
-  .product { grid-template-columns: 1fr; }
+  .product {
+    grid-template-columns: 1fr;
+  }
+
+  .product-image img {
+    border-radius: 10px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

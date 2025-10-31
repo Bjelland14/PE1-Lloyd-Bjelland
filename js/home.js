@@ -71,22 +71,57 @@ function wireCarousel() {
   const dots = Array.from(dotsEl.querySelectorAll("button"));
   const hero = document.getElementById("hero-carousel");
 
-  function go(n) {
-    idx = (n + slides.length) % slides.length;
-    track.style.transform = `translateX(-${idx * 100}%)`;
-    dots.forEach((d, i) => d.setAttribute("aria-current", i === idx ? "true" : "false"));
-  }
-  function next() { go(idx + 1); }
-  function prev() { go(idx - 1); }
-  function start() { stop(); timer = setInterval(next, 5000); }
-  function stop() { if (timer) clearInterval(timer); }
+function go(n) {
+  idx = (n + slides.length) % slides.length;
+  track.style.transform = `translateX(-${idx * 100}%)`;
+  dots.forEach((d, i) =>
+    d.setAttribute("aria-current", i === idx ? "true" : "false")
+  );
+}
 
-  if (nextBtn) nextBtn.addEventListener("click", next);
-  if (prevBtn) prevBtn.addEventListener("click", prev);
-  dots.forEach((d, i) => d.addEventListener("click", () => go(i)));
-  if (hero) {
-    hero.addEventListener("mouseenter", stop);
-    hero.addEventListener("mouseleave", start);
+
+  function next() {
+    go(idx + 1);
   }
-  start();
+
+  function prev() {
+    go(idx - 1); 
+  }
+
+  let autoTimer;
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(next, 5000);
+  }
+
+  function stopAuto() {
+    if (autoTimer) clearInterval(autoTimer);
+  }
+
+  function pauseAndResume() {
+    stopAuto();
+    setTimeout(startAuto, 5000); 
+  }
+
+  nextBtn.addEventListener("click", () => {
+    next();
+    pauseAndResume();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    prev();
+    pauseAndResume();
+  });
+
+  dots.forEach((d, i) =>
+    d.addEventListener("click", () => {
+      go(i);
+      pauseAndResume();
+    })
+  );
+
+  hero.addEventListener("mouseenter", stopAuto);
+  hero.addEventListener("mouseleave", startAuto);
+
+  startAuto();
 }
