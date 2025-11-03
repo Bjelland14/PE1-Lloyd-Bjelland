@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STAV — Register</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <img src="../assets/STAVLOGO.png" alt="STAV" height="36" />
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html" class="nav-btn">Home</a>
+        <a href="./login.html" class="nav-btn">Login</a>
+        <a href="../cart.html" class="nav-btn">🛒 Cart <span id="cart-count"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 420px; margin: 3rem auto;">
+    <h1>Register</h1>
+
+    <form id="register-form" class="auth-form">
+      <label>Full name
+        <input type="text" id="reg-name" required placeholder="Jane Doe" />
+      </label>
+
+      <label>Email
+        <input type="email" id="reg-email" required placeholder="you@example.com" />
+      </label>
+
+      <label>Password
+        <input type="password" id="reg-password" required minlength="6" placeholder="********" />
+      </label>
+
+      <button type="submit" class="primary">Register</button>
+      <p id="register-msg" class="form-msg"></p>
+
+      <p style="margin-top:1rem;">Already have an account? 
+        <a href="./login.html">Login here</a>
+      </p>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>&copy; 2025 STAV</small>
+      <div class="footer-buttons">
+        <a href="./login.html" class="footer-btn">Login</a>
+        <a href="../cart.html" class="footer-btn">Cart</a>
+        <a href="./register.html" class="footer-btn">Register</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    const form = document.getElementById("register-form");
+    const msg = document.getElementById("register-msg");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("reg-name").value.trim();
+      const email = document.getElementById("reg-email").value.trim();
+      const pass = document.getElementById("reg-password").value.trim();
+
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+      if (users.find(u => u.email === email)) {
+        msg.style.color = "red";
+        msg.textContent = "Email already registered.";
+        return;
+      }
+
+      users.push({ name, email, password: pass });
+      localStorage.setItem("users", JSON.stringify(users));
+      msg.style.color = "green";
+      msg.textContent = "Registration successful! Redirecting...";
+      setTimeout(() => location.href = "./login.html", 1200);
+    });
+  </script>
+</body>
+</html>

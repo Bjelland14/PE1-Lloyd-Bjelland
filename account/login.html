@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STAV — Login</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <img src="../assets/STAVLOGO.png" alt="STAV" height="36" />
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html" class="nav-btn">Home</a>
+        <a href="./register.html" class="nav-btn">Register</a>
+        <a href="../cart.html" class="nav-btn">🛒 Cart <span id="cart-count"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 420px; margin: 3rem auto;">
+    <h1>Login</h1>
+
+    <form id="login-form" class="auth-form">
+      <label>Email
+        <input type="email" id="login-email" required placeholder="you@example.com" />
+      </label>
+
+      <label>Password
+        <input type="password" id="login-password" required placeholder="********" />
+      </label>
+
+      <button type="submit" class="primary">Login</button>
+      <p id="login-msg" class="form-msg"></p>
+
+      <p style="margin-top:1rem;">Don’t have an account? 
+        <a href="./register.html">Register here</a>
+      </p>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>&copy; 2025 STAV</small>
+      <div class="footer-buttons">
+        <a href="./login.html" class="footer-btn">Login</a>
+        <a href="../cart.html" class="footer-btn">Cart</a>
+        <a href="./register.html" class="footer-btn">Register</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    const form = document.getElementById("login-form");
+    const msg = document.getElementById("login-msg");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("login-email").value.trim();
+      const pass = document.getElementById("login-password").value.trim();
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+      const user = users.find(u => u.email === email && u.password === pass);
+
+      if (user) {
+        localStorage.setItem("loggedInUser", JSON.stringify(user));
+        msg.style.color = "green";
+        msg.textContent = "Login successful! Redirecting...";
+        setTimeout(() => location.href = "../index.html", 1200);
+      } else {
+        msg.style.color = "red";
+        msg.textContent = "Invalid email or password.";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -10,38 +10,47 @@
         <link rel="stylesheet" href="./css/pages.css">
     </head>
     
-    
-<body>        
     <header class="site-header">
-        <div class="container">
-       <a class="logo" href="./">
-            <img src="./assets/STAVLOGO.png" alt="STAV" height="36">
-        </a>
-        <nav class="site-nav">
-            <a href="./account/login.html">Login</a>
-            <a href="./account/register.html">Register</a>
-            <a href="./cart.html">Cart</a>
-        </nav>
-    </div>    
-</header>       
+  <div class="container header-inner">
+    <a class="logo" href="./">
+      <img src="./assets/STAVLOGO.png" alt="STAV" height="36">
+    </a>
 
-<main class="container">
-    <section id="product-detail" class="product-detail">
-        <div id="status" role="status">Loading product...</div>
-    </section>
+    <form class="site-search" role="search" action="./index.html">
+      <input
+        name="q"
+        type="search"
+        placeholder="Search for products"
+        aria-label="Search"
+      />
+    </form>
+
+    <nav class="nav-links">
+      <a href="./index.html" class="nav-btn">Home</a>
+      <a href="./account/login.html" class="nav-btn">Login</a>
+      <a href="./account/register.html" class="nav-btn">Register</a>
+    <a href="./cart.html" class="nav-btn">
+        🛒 Cart <span id="cart-count"></span>
+    </a>
+    </nav>
+  </div>
+</header>
+
+<main class="fcontainer">   
+<section id="product-container">
+    <div id="status" role="status">Loading product...</div>
+</section>
 </main>
 
 <footer class="site-footer">
-    <div class="container footer-inner">
-        <small>&copy; STAV</small>
-        <nav class="footer-nav">
-            <a href="./index.html">Home</a>
-            <a href="./account/login.html">Account</a>
-            <a href="./cart.html">Cart</a>
-        </nav>
-    </div>
+    <footer class="container footer-inner">
+        <div class="footer buttons">
+      <a href="./account/login.html" class="footer-btn">Login</a>
+      <a href="./cart.html" class="footer-btn">Cart</a>
+      <a href="./account/register.html" class="footer-btn">Register</a>
+        </div>    
 </footer>
 
-        <script type="module" src="./js/product.js"></script>
+<script type="module" src="./js/product.js"></script>
     </body>
 </html>

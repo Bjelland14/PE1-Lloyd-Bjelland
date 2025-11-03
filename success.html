@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>STAV — Success</title>
+  <link rel="stylesheet" href="./css/base.css"/>
+  <link rel="stylesheet" href="./css/layout.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="./index.html">
+        <img src="./assets/STAVLOGO.png" alt="STAV" height="36"/>
+      </a>
+      <nav class="nav-links">
+        <a href="./index.html" class="nav-btn">Home</a>
+        <a href="./cart.html" class="nav-btn">🛒 Cart <span id="cart-count"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="text-align:center; padding:4rem 1rem;">
+    <h1>🎉 Thank you for your purchase!</h1>
+    <p id="order-line" style="margin:.5rem 0 1.5rem;">Your order is confirmed.</p>
+    <a href="./index.html" class="nav-btn" style="display:inline-block;">Back to Home</a>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>&copy; 2025 STAV</small>
+    </div>
+  </footer>
+
+  <script type="module">
+    let updateCartCount;
+    try {
+      const mod = await import('./js/global.js');
+      updateCartCount = mod.updateCartCount;
+    } catch (_) {
+      updateCartCount = function(){
+        const el = document.getElementById('cart-count');
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const total = cart.reduce((s,i)=>s+(i.qty||1),0);
+        if (el) el.textContent = total ? `(${total})` : '';
+      }
+    }
+    updateCartCount();
+
+    const params = new URLSearchParams(location.search);
+    const order = params.get('order');
+    if (order) {
+      const line = document.getElementById('order-line');
+      line.textContent = `Your order number is ${order}. A confirmation has been sent to your email.`;
+    }
+  </script>
+</body>
+</html>
