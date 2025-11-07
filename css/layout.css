@@ -1,3 +1,31 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #111;
+
+  background: #f5f5f5;
+}
+
+main {
+  flex: 1;
+}
+
+
+main {
+  flex: 1;
+}
+
+
 .site-header {
   background: #fff;
   border-bottom: 1px solid #eee;
@@ -8,7 +36,6 @@
 }
 
 .header-inner {
-
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -16,7 +43,10 @@
   padding: 1rem 0;
 }
 
-.site-search { display: flex; }
+.site-search {
+  display: flex;
+}
+
 .site-search input {
   width: 100%;
   height: 40px;
@@ -26,6 +56,7 @@
   padding: .5rem 1rem;
   outline: none;
 }
+
 .site-search input:focus {
   background: #fff;
   box-shadow: 0 0 0 3px rgba(162,210,255,.35);
@@ -58,6 +89,23 @@
   background: #91c4f2;
   transform: translateY(-2px);
 }
+
+#welcome-msg {
+  font-weight: 600;
+  color: #333;
+}
+
+#logout-btn {
+  background: #ffb3b3;
+  color: #111;
+  border: none;
+}
+
+#logout-btn:hover {
+  background: #ff9999;
+  transform: translateY(-2px);
+}
+
 
 .site-footer {
   background: #f9f9f9;
@@ -107,10 +155,12 @@
   color: #555;
 }
 
+
 @media (max-width: 900px) {
   .header-inner {
     grid-template-columns: 1fr; 
   }
+
   .nav-links {
     justify-content: center;
     flex-wrap: wrap;

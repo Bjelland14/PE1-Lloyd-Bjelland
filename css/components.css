@@ -177,3 +177,33 @@
     object-fit: cover;
   }
 }
+
+/* --- SHOP BY CATEGORY --- */
+.categories {
+  margin: 2rem 0;
+}
+
+.category-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.category-card {
+  background: #111;
+  color: #fff;
+  padding: 1.25rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.category-card h3 {
+  margin: 0 0 .35rem;
+}
+
+.category-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}

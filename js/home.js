@@ -8,37 +8,55 @@ const dotsEl = document.getElementById("carousel-dots");
 const prevBtn = document.querySelector(".carousel .prev");
 const nextBtn = document.querySelector(".carousel .next");
 
-let idx = 0, slides = [], timer;
+let idx = 0;
+let slides = [];
 
+/* HOVED-LOAD */
 (async () => {
   try {
+    // Hent produkter + featured samtidig
     const [{ data: items }, { data: featured }] = await Promise.all([
       getProducts({ limit: 12 }),
       getProducts({ limit: 3 })
     ]);
 
-    if (grid) grid.innerHTML = items.map(card).join("");
+    // Fyll produkt-grid
+    if (grid) {
+      grid.innerHTML = items.map(card).join("");
+    }
 
-    if (track && dotsEl) {
+    // Bygg hero-karusell
+    if (track && dotsEl && featured.length) {
       track.innerHTML = featured.map(slideHTML).join("");
+
       dotsEl.innerHTML = featured
-        .map((_, i) => `<button type="button" ${i === 0 ? 'aria-current="true"' : ""} aria-label="Go to slide ${i + 1}"></button>`)
+        .map(
+          (_, i) =>
+            `<button type="button" ${
+              i === 0 ? 'aria-current="true"' : ""
+            } aria-label="Go to slide ${i + 1}"></button>`
+        )
         .join("");
+
       slides = Array.from(track.children);
       wireCarousel();
     }
 
     if (statusEl) statusEl.textContent = "";
   } catch (err) {
-    if (statusEl) statusEl.textContent = err.message || "Something went wrong.";
     console.error(err);
+    if (statusEl) statusEl.textContent = err.message || "Something went wrong.";
   }
 })();
+
+/* --- RENDER-FUNKSJONER --- */
 
 function card(p) {
   const price =
     p.discountedPrice && p.discountedPrice < p.price
-      ? `<s>${p.price.toFixed(2)} NOK</s> <strong>${p.discountedPrice.toFixed(2)} NOK</strong>`
+      ? `<s>${p.price.toFixed(2)} NOK</s> <strong>${p.discountedPrice.toFixed(
+          2
+        )} NOK</strong>`
       : `<strong>${p.price.toFixed(2)} NOK</strong>`;
 
   return `
@@ -67,25 +85,26 @@ function slideHTML(p) {
   `;
 }
 
+/* --- KARUSELL --- */
+
 function wireCarousel() {
   const dots = Array.from(dotsEl.querySelectorAll("button"));
   const hero = document.getElementById("hero-carousel");
 
-function go(n) {
-  idx = (n + slides.length) % slides.length;
-  track.style.transform = `translateX(-${idx * 100}%)`;
-  dots.forEach((d, i) =>
-    d.setAttribute("aria-current", i === idx ? "true" : "false")
-  );
-}
-
+  function go(n) {
+    idx = (n + slides.length) % slides.length;
+    track.style.transform = `translateX(-${idx * 100}%)`;
+    dots.forEach((d, i) =>
+      d.setAttribute("aria-current", i === idx ? "true" : "false")
+    );
+  }
 
   function next() {
     go(idx + 1);
   }
 
   function prev() {
-    go(idx - 1); 
+    go(idx - 1);
   }
 
   let autoTimer;
@@ -93,35 +112,32 @@ function go(n) {
     stopAuto();
     autoTimer = setInterval(next, 5000);
   }
-
   function stopAuto() {
     if (autoTimer) clearInterval(autoTimer);
   }
 
-  function pauseAndResume() {
-    stopAuto();
-    setTimeout(startAuto, 5000); 
-  }
-
-  nextBtn.addEventListener("click", () => {
+  nextBtn?.addEventListener("click", () => {
     next();
-    pauseAndResume();
+    stopAuto();
+    startAuto();
   });
 
-  prevBtn.addEventListener("click", () => {
+  prevBtn?.addEventListener("click", () => {
     prev();
-    pauseAndResume();
+    stopAuto();
+    startAuto();
   });
 
   dots.forEach((d, i) =>
     d.addEventListener("click", () => {
       go(i);
-      pauseAndResume();
+      stopAuto();
+      startAuto();
     })
   );
 
-  hero.addEventListener("mouseenter", stopAuto);
-  hero.addEventListener("mouseleave", startAuto);
+  hero?.addEventListener("mouseenter", stopAuto);
+  hero?.addEventListener("mouseleave", startAuto);
 
   startAuto();
 }
