@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="./css/layout.css" />
     <link rel="stylesheet" href="./css/components.css" />
     <link rel="stylesheet" href="./css/pages.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <header class="site-header">
       <div class="container header-inner">
         <a class="logo" href="./">
-          <img src="./assets/STAVLOGO.png" alt="STAV" height="36" />
+          <img src="./assets/STAVLOGO.png" alt="STAV" height="36">
         </a>
 
         <form class="site-search" role="search" action="./index.html">
@@ -32,38 +32,35 @@
           <a href="./index.html" class="nav-btn">Home</a>
           <a href="./account/login.html" class="nav-btn">Login</a>
           <a href="./account/register.html" class="nav-btn">Register</a>
-          <a href="./cart.html" class="nav-btn">🛒 Cart <span id="cart-count"></span></a>
+          <a href="./cart.html" class="nav-btn">
+            🛒 Cart <span id="cart-count"></span>
+          </a>
         </nav>
       </div>
     </header>
 
-    <main class="container home-layout">
+    <main class="container">
+      <h2 id="welcome-banner"></h2>
 
-      <div class="left-panel">
-        <h2 id="welcome-banner"></h2>
+      <section class="hero" aria-label="Featured">
+        <div id="hero-carousel" class="carousel">
+          <button class="nav prev" aria-label="Previous slide">‹</button>
+          <div class="track" id="carousel-track"></div>
+          <button class="nav next" aria-label="Next slide">›</button>
+          <div class="dots" id="carousel-dots"></div>
+        </div>
+      </section>
 
-        <section class="hero" aria-label="Featured">
-          <div id="hero-carousel" class="carousel">
-            <button class="nav prev" aria-label="Previous slide">‹</button>
-            <div class="track" id="carousel-track"></div>
-            <button class="nav next" aria-label="Next slide">›</button>
-            <div class="dots" id="carousel-dots"></div>
-          </div>
-        </section>
+      <section class="categories" aria-labelledby="cat-title">
+        <h2 id="cat-title">Shop by Category</h2>
+        <div id="category-row" class="category-row"></div>
+      </section>
 
-        <section class="categories" aria-labelledby="cat-title">
-          <h2 id="cat-title">Shop by Category</h2>
-          <div id="category-row" class="category-row"></div>
-        </section>
-      </div>
-
-      <div class="right-panel">
-        <section class="products">
-          <h2>New Arrivals</h2>
-          <div id="status" role="status">Loading...</div>
-          <div id="products-grid" class="grid"></div>
-        </section>
-      </div>
+      <section class="products">
+        <h2>New Arrivals</h2>
+        <div id="status" role="status">Loading...</div>
+        <div id="products-grid" class="grid"></div>
+      </section>
     </main>
 
     <footer class="site-footer">
@@ -76,7 +73,7 @@
         <small>&copy; 2025 STAV. All rights reserved.</small>
       </div>
     </footer>
-
+ 
     <script type="module" src="./js/global.js"></script>
     <script type="module" src="./js/home.js"></script>
   </body>
