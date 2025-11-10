@@ -8,28 +8,34 @@ const dotsEl = document.getElementById("carousel-dots");
 const prevBtn = document.querySelector(".carousel .prev");
 const nextBtn = document.querySelector(".carousel .next");
 
+const featuredGrid = document.getElementById("featured-grid");
+
 let idx = 0;
 let slides = [];
 
-/* HOVED-LOAD */
 (async () => {
   try {
-    // Hent produkter + featured samtidig
-    const [{ data: items }, { data: featured }] = await Promise.all([
-      getProducts({ limit: 12 }),
-      getProducts({ limit: 3 })
-    ]);
 
-    // Fyll produkt-grid
-    if (grid) {
-      grid.innerHTML = items.map(card).join("");
+    const { data: items } = await getProducts({ limit: 12 });
+
+    const heroProducts = items.slice(0, 3); 
+
+    const hotProducts = items.slice(3, 7); 
+
+    const restProducts = items.slice(7);
+
+    if (featuredGrid && hotProducts.length) {
+      featuredGrid.innerHTML = hotProducts.map(featuredCard).join("");
     }
 
-    // Bygg hero-karusell
-    if (track && dotsEl && featured.length) {
-      track.innerHTML = featured.map(slideHTML).join("");
+    if (grid) {
+      grid.innerHTML = restProducts.map(card).join("");
+    }
 
-      dotsEl.innerHTML = featured
+    if (track && dotsEl && heroProducts.length) {
+      track.innerHTML = heroProducts.map(slideHTML).join("");
+
+      dotsEl.innerHTML = heroProducts
         .map(
           (_, i) =>
             `<button type="button" ${
@@ -49,21 +55,39 @@ let slides = [];
   }
 })();
 
-/* --- RENDER-FUNKSJONER --- */
+
+function formatPrice(p) {
+  const value =
+    p.discountedPrice && p.discountedPrice < p.price
+      ? p.discountedPrice
+      : p.price;
+
+  return `<strong>${value.toFixed(2)} NOK</strong>`;
+}
 
 function card(p) {
-  const price =
-    p.discountedPrice && p.discountedPrice < p.price
-      ? `<s>${p.price.toFixed(2)} NOK</s> <strong>${p.discountedPrice.toFixed(
-          2
-        )} NOK</strong>`
-      : `<strong>${p.price.toFixed(2)} NOK</strong>`;
+  const price = formatPrice(p);
 
   return `
     <a class="card" href="./product.html?id=${p.id}">
       <img src="${p.image?.url}" alt="${p.image?.alt || p.title}">
       <h3>${p.title}</h3>
       <p>${price}</p>
+    </a>
+  `;
+}
+
+function featuredCard(p) {
+  const price = formatPrice(p);
+
+  return `
+    <a class="card featured-card" href="./product.html?id=${p.id}">
+      <img src="${p.image?.url}" alt="${p.image?.alt || p.title}">
+      <div class="featured-info">
+        <h3>${p.title}</h3>
+        <p class="price">${price}</p>
+        <p class="tagline">Bestseller · Limited stock</p>
+      </div>
     </a>
   `;
 }
@@ -85,7 +109,6 @@ function slideHTML(p) {
   `;
 }
 
-/* --- KARUSELL --- */
 
 function wireCarousel() {
   const dots = Array.from(dotsEl.querySelectorAll("button"));
