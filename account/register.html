@@ -22,16 +22,17 @@
       <nav class="nav-links">
         <a href="../index.html" class="nav-btn">Home</a>
         <a href="./login.html" class="nav-btn">Login</a>
-        <a href="./account/register.html" class="nav-btn">Register</a>
+        <a href="./register.html" class="nav-btn">Register</a>
         <a href="../cart.html" class="nav-btn">🛒 Cart <span id="cart-count"></span></a>
       </nav>
     </div>
   </header>
 
-  <main class="container" style="max-width: 420px; margin: 3rem auto;">
+  <main class="container container--narrow">
     <h1>Register</h1>
 
     <form id="register-form" class="auth-form">
+
       <label>Full name
         <input type="text" id="reg-name" required placeholder="Jane Doe" />
       </label>
@@ -45,12 +46,14 @@
       </label>
 
       <button type="submit" class="primary">Register</button>
+
       <p id="register-msg" class="form-msg"></p>
 
-      <p style="margin-top:1rem;">
+      <p class="mt-1">
         Already have an account?
         <a href="./login.html">Login here</a>
       </p>
+
     </form>
   </main>
 
@@ -58,15 +61,16 @@
     <div class="container footer-inner">
       <small>&copy; 2025 STAV</small>
       <div class="footer-buttons">
-        <a href="index.html" class="footer-btn">Home</a>
+        <a href="../index.html" class="footer-btn">Home</a>
         <a href="./login.html" class="footer-btn">Login</a>
         <a href="./register.html" class="footer-btn">Register</a>
         <a href="../cart.html" class="footer-btn">Cart</a>
       </div>
     </div>
   </footer>
- 
-  <script type="module" src="./js/global.js"></script>
+
+  <script type="module" src="../js/global.js"></script>
   <script type="module" src="../js/register.js"></script>
+
 </body>
 </html>
