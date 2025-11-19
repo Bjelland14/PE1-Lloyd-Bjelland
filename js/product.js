@@ -9,7 +9,7 @@ const cartCountEl = document.getElementById("cart-count");
 
 (async () => {
   if (!id) {
-    statusEl.textContent = "No product selected.";
+    if (statusEl) statusEl.textContent = "No product selected.";
     return;
   }
 
@@ -20,9 +20,9 @@ const cartCountEl = document.getElementById("cart-count");
     updateCartCount();
     setupButtons(product);
     await renderRecommendations(product.id);
-    statusEl.textContent = "";
+    if (statusEl) statusEl.textContent = "";
   } catch (error) {
-    statusEl.textContent = "Failed to load product.";
+    if (statusEl) statusEl.textContent = "Failed to load product.";
     console.error(error);
   }
 })();
@@ -33,8 +33,12 @@ function renderProduct(p) {
     ? `<s>${p.price.toFixed(2)} NOK</s> <strong>${p.discountedPrice.toFixed(2)} NOK</strong>`
     : `<strong>${p.price.toFixed(2)} NOK</strong>`;
 
-  const stars = "★".repeat(p.rating || 0) + "☆".repeat(5 - (p.rating || 0));
-  const tags = Array.isArray(p.tags) ? p.tags.map(t => `<span>#${t}</span>`).join(" ") : "";
+  const rating = Math.max(0, Math.min(5, p.rating || 0));
+  const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
+
+  const tags = Array.isArray(p.tags)
+    ? p.tags.map(t => `<span>#${t}</span>`).join(" ")
+    : "";
 
   const reviews = Array.isArray(p.reviews) && p.reviews.length
     ? p.reviews.map(r => `
@@ -85,15 +89,18 @@ function setupButtons(p) {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     const existing = cart.find(i => i.id === p.id);
 
-    if (existing) existing.qty += 1;
-    else cart.push({
-      id: p.id,
-      title: p.title,
-      price: p.price,
-      discountedPrice: p.discountedPrice,
-      image: p.image,
-      qty: 1,
-    });
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({
+        id: p.id,
+        title: p.title,
+        price: p.price,
+        discountedPrice: p.discountedPrice,
+        image: p.image,
+        qty: 1,
+      });
+    }
 
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
@@ -124,7 +131,9 @@ function setupButtons(p) {
 function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   const totalItems = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
-  if (cartCountEl) cartCountEl.textContent = totalItems > 0 ? `(${totalItems})` : "";
+  if (cartCountEl) {
+    cartCountEl.textContent = totalItems > 0 ? `(${totalItems})` : "";
+  }
 }
 
 async function renderRecommendations(currentId) {
@@ -134,6 +143,8 @@ async function renderRecommendations(currentId) {
     const picks = others.sort(() => 0.5 - Math.random()).slice(0, 3);
 
     const grid = document.getElementById("recommendation-grid");
+    if (!grid) return;
+
     grid.innerHTML = picks.map(p => `
       <a class="card" href="./product.html?id=${p.id}">
         <div class="thumb">

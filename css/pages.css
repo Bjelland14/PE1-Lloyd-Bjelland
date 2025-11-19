@@ -458,3 +458,34 @@ button.primary.added {
   font-size: 0.85rem;
   color: #ccc;
 }
+
+.checkout-item {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  background: #fff;
+}
+
+.checkout-item-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.checkout-item-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.checkout-item-meta {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.checkout-item-total {
+  margin-left: auto;
+  font-weight: 700;
+}

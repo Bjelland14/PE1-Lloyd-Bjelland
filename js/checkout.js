@@ -12,7 +12,8 @@ function renderSummary() {
   if (!cart.length) {
     summaryWrap.innerHTML = "<p>Your cart is empty.</p>";
     summaryTotal.textContent = "Total: 0 NOK";
-    form.querySelector("button[type='submit']").setAttribute("disabled", "disabled");
+    const submitBtn = form.querySelector("button[type='submit']");
+    if (submitBtn) submitBtn.setAttribute("disabled", "disabled");
     return;
   }
 
@@ -24,14 +25,18 @@ function renderSummary() {
       total += sub;
 
       return `
-        <div class="cart-item" style="border:1px solid #eee; border-radius:10px; padding:.75rem; margin:.5rem 0;">
-          <div style="display:flex; align-items:center; gap:12px;">
-            <img src="${item.image?.url}" alt="${item.title}" style="width:64px;height:64px;object-fit:cover;border-radius:8px;">
+        <div class="checkout-item">
+          <div class="checkout-item-inner">
+            <img src="${item.image?.url}" alt="${item.title}" class="checkout-item-thumb">
             <div>
               <strong>${item.title}</strong>
-              <div style="font-size:.95rem; color:#555;">${price.toFixed(2)} NOK × ${item.qty || 1}</div>
+              <div class="checkout-item-meta">
+                ${price.toFixed(2)} NOK × ${item.qty || 1}
+              </div>
             </div>
-            <div style="margin-left:auto; font-weight:700;">${sub.toFixed(2)} NOK</div>
+            <div class="checkout-item-total">
+              ${sub.toFixed(2)} NOK
+            </div>
           </div>
         </div>
       `;
@@ -39,7 +44,8 @@ function renderSummary() {
     .join("");
 
   summaryTotal.textContent = `Total: ${total.toFixed(2)} NOK`;
-  form.querySelector("button[type='submit']").removeAttribute("disabled");
+  const submitBtn = form.querySelector("button[type='submit']");
+  if (submitBtn) submitBtn.removeAttribute("disabled");
 }
 
 renderSummary();
@@ -72,4 +78,3 @@ form.addEventListener("submit", (e) => {
 
   location.href = `./success.html?order=${encodeURIComponent(orderId)}`;
 });
-

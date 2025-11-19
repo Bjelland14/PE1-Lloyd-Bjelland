@@ -11,25 +11,21 @@ export function updateAuthButtons() {
 
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser") || "null");
 
+  // Fjern gamle welcome/logout hvis de finnes
   const oldLogout = nav.querySelector("#logout-btn");
   const oldWelcome = nav.querySelector("#welcome-msg");
   if (oldLogout) oldLogout.remove();
   if (oldWelcome) oldWelcome.remove();
 
   if (loggedInUser) {
-
     const welcome = document.createElement("span");
     welcome.id = "welcome-msg";
     welcome.textContent = `👋 Welcome, ${loggedInUser.name || "User"}`;
-    welcome.style.marginRight = "0.75rem";
-    welcome.style.fontWeight = "600";
-    welcome.style.color = "#333";
 
     const logoutBtn = document.createElement("button");
     logoutBtn.id = "logout-btn";
     logoutBtn.textContent = "Logout";
     logoutBtn.className = "nav-btn";
-    logoutBtn.style.cursor = "pointer";
 
     logoutBtn.addEventListener("click", () => {
       localStorage.removeItem("loggedInUser");

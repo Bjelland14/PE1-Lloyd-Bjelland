@@ -76,6 +76,7 @@ main {
   justify-content: center;
   line-height: 1;
   transition: all 0.2s ease;
+  cursor: pointer;         
 }
 
 .nav-links a:hover,
@@ -87,6 +88,7 @@ main {
 #welcome-msg {
   font-weight: 600;
   color: #333;
+  margin-right: 0.75rem;    
 }
 
 #logout-btn {
@@ -202,4 +204,9 @@ main {
 
 .error-text {
   color: #c1121f;
+}
+
+.success-text {
+  color: #4caf50;
+  font-weight: 600;
 }

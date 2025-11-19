@@ -12,13 +12,18 @@ if (form) {
 
     const user = users.find((u) => u.email === email && u.password === pass);
 
+    msg.className = "";
+    msg.textContent = "";
+
     if (user) {
       localStorage.setItem("loggedInUser", JSON.stringify(user));
-      msg.style.color = "green";
+      
+      msg.classList.add("success-text");
       msg.textContent = "Login successful! Redirecting...";
+
       setTimeout(() => (location.href = "../index.html"), 1200);
     } else {
-      msg.style.color = "red";
+      msg.classList.add("error-text");
       msg.textContent = "Invalid email or password.";
     }
   });

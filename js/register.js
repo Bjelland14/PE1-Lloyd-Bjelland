@@ -11,8 +11,11 @@ if (form) {
 
     const users = JSON.parse(localStorage.getItem("users") || "[]");
 
+    msg.className = "";
+    msg.textContent = "";
+
     if (users.find((u) => u.email === email)) {
-      msg.style.color = "red";
+      msg.className = "error-text";
       msg.textContent = "Email already registered.";
       return;
     }
@@ -20,7 +23,7 @@ if (form) {
     users.push({ name, email, password: pass });
     localStorage.setItem("users", JSON.stringify(users));
 
-    msg.style.color = "green";
+    msg.className = "success-text";
     msg.textContent = "Registration successful! Redirecting...";
 
     setTimeout(() => (location.href = "./login.html"), 1200);
