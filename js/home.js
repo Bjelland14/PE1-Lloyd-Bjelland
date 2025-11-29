@@ -13,24 +13,28 @@ const featuredGrid = document.getElementById("featured-grid");
 let idx = 0;
 let slides = [];
 
+let allProducts = [];
+
+function renderGrid(products) {
+  if (!grid) return;
+  grid.innerHTML = products.map(card).join("");
+}
+
 (async () => {
   try {
-
     const { data: items } = await getProducts({ limit: 12 });
 
-    const heroProducts = items.slice(0, 3); 
+    allProducts = items; 
 
-    const hotProducts = items.slice(3, 7); 
-
+    const heroProducts = items.slice(0, 3);
+    const hotProducts = items.slice(3, 7);
     const restProducts = items.slice(7);
 
     if (featuredGrid && hotProducts.length) {
       featuredGrid.innerHTML = hotProducts.map(featuredCard).join("");
     }
 
-    if (grid) {
-      grid.innerHTML = restProducts.map(card).join("");
-    }
+    renderGrid(restProducts);
 
     if (track && dotsEl && heroProducts.length) {
       track.innerHTML = heroProducts.map(slideHTML).join("");
@@ -54,7 +58,6 @@ let slides = [];
     if (statusEl) statusEl.textContent = err.message || "Something went wrong.";
   }
 })();
-
 
 function formatPrice(p) {
   const value =
@@ -109,7 +112,6 @@ function slideHTML(p) {
   `;
 }
 
-
 function wireCarousel() {
   const dots = Array.from(dotsEl.querySelectorAll("button"));
   const hero = document.getElementById("hero-carousel");
@@ -163,4 +165,33 @@ function wireCarousel() {
   hero?.addEventListener("mouseleave", startAuto);
 
   startAuto();
+}
+
+const searchForm = document.querySelector(".site-search");
+const searchInput = searchForm?.querySelector("input[name='q']");
+
+if (searchForm && grid) {
+  searchForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const query = searchInput.value.trim().toLowerCase();
+
+    if (!allProducts.length) return;
+
+    if (!query) {
+      renderGrid(allProducts.slice(7));
+      return;
+    }
+
+    const filtered = allProducts.filter((p) =>
+      p.title.toLowerCase().includes(query)
+    );
+
+    if (!filtered.length) {
+      grid.innerHTML = "<p>No products match your search.</p>";
+      return;
+    }
+
+    renderGrid(filtered);
+  });
 }
