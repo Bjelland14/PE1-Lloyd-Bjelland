@@ -1,3 +1,23 @@
+function seedDemoUser() {
+  try {
+    const stored = localStorage.getItem("users");
+    const users = stored ? JSON.parse(stored) : [];
+
+    const exists = users.some((u) => u.email === "admin@stud.noroff.no");
+    if (exists) return;
+
+    users.push({
+      name: "Store Owner",
+      email: "admin@stud.noroff.no",
+      password: "Admin123",
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+  } catch (error) {
+    console.error("Failed to seed demo user:", error);
+  }
+}
+
 export function updateCartCount() {
   const el = document.getElementById("cart-count");
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -11,7 +31,6 @@ export function updateAuthButtons() {
 
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser") || "null");
 
-  // Fjern gamle welcome/logout hvis de finnes
   const oldLogout = nav.querySelector("#logout-btn");
   const oldWelcome = nav.querySelector("#welcome-msg");
   if (oldLogout) oldLogout.remove();
@@ -30,7 +49,12 @@ export function updateAuthButtons() {
     logoutBtn.addEventListener("click", () => {
       localStorage.removeItem("loggedInUser");
       alert("You have been logged out.");
-      location.href = "./index.html";
+
+      if (location.pathname.includes("/account/")) {
+        location.href = "../index.html";
+      } else {
+        location.href = "./index.html";
+      }
     });
 
     nav.appendChild(welcome);
@@ -39,6 +63,8 @@ export function updateAuthButtons() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  seedDemoUser();
+
   updateCartCount();
   updateAuthButtons();
 
