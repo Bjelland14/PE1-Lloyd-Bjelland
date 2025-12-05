@@ -7,7 +7,7 @@
 
   <meta
     name="description"
-    content="Enter your delivery details and payment information to complete your order at STAV."
+    content="Enter delivery details and confirm your order at STAV."
   />
 
   <link rel="stylesheet" href="./css/base.css"/>
@@ -20,19 +20,25 @@
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="./index.html">
         <img src="./assets/STAVLOGO.png" alt="STAV logo" height="36"/>
       </a>
-      <nav class="nav-links">
+      <nav class="nav-links" aria-label="Main navigation">
         <a href="./index.html" class="nav-btn">Home</a>
-        <a href="./cart.html" class="nav-btn">🛒 Cart <span id="cart-count"></span></a>
+        <a href="./account/login.html" class="nav-btn">Login</a>
+        <a href="./account/register.html" class="nav-btn">Register</a>
+        <a href="./cart.html" class="nav-btn">
+          🛒 Cart <span id="cart-count" aria-live="polite"></span>
+        </a>
       </nav>
     </div>
   </header>
 
-  <main class="container container--narrow">
+  <main class="container" id="main-content">
     <h1>Checkout</h1>
 
     <section id="order-summary" class="panel">
@@ -41,23 +47,24 @@
       <h3 id="summary-total" class="mt-1">Total: 0 NOK</h3>
     </section>
 
-    <form id="checkout-form" class="checkout-form">
+    <form id="checkout-form" class="checkout-form" novalidate>
       <h2>Delivery details</h2>
 
-      <label>Full name
+      <label for="fullName">Full name
         <input id="fullName" type="text" required placeholder="Jane Doe"/>
       </label>
 
-      <label>Email
+      <label for="email">Email
         <input id="email" type="email" required placeholder="jane@example.com"/>
       </label>
 
-      <label>Address
+      <label for="address">Address
         <input id="address" type="text" required placeholder="Street 1, 1234 City"/>
       </label>
 
       <h2 class="mt-15">Payment</h2>
-      <label>Card number
+
+      <label for="card">Card number
         <input id="card" inputmode="numeric" pattern="[0-9 ]{12,19}" required placeholder="1234 5678 9012 3456"/>
       </label>
 

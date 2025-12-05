@@ -7,7 +7,7 @@
 
   <meta
     name="description"
-    content="Login to your STAV account to manage your cart and complete purchases."
+    content="Log in to your STAV account to manage your cart and checkout."
   />
 
   <link rel="stylesheet" href="../css/base.css" />
@@ -16,16 +16,21 @@
 
   <link rel="icon" href="../assets/STAVLOGO.png" type="image/png" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="../index.html">
         <img src="../assets/STAVLOGO.png" alt="STAV logo" height="36" />
       </a>
-      <nav class="nav-links">
+      <nav class="nav-links" aria-label="Main navigation">
         <a href="../index.html" class="nav-btn">Home</a>
         <a href="./login.html" class="nav-btn nav-btn--active">Login</a>
         <a href="./register.html" class="nav-btn">Register</a>
@@ -34,15 +39,15 @@
     </div>
   </header>
 
-  <main class="container container--narrow">
+  <main class="container container--narrow" id="main-content">
     <h1>Login</h1>
 
-    <form id="login-form" class="auth-form">
-      <label>Email
+    <form id="login-form" class="auth-form" novalidate>
+      <label for="login-email">Email
         <input type="email" id="login-email" required placeholder="you@example.com" />
       </label>
 
-      <label>Password
+      <label for="login-password">Password
         <input type="password" id="login-password" required placeholder="********" />
       </label>
 

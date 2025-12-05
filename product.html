@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>STAV – Product</title>
-
-  <meta
-    name="description"
-    content="View detailed product information, including price, rating, reviews and tags at STAV."
-  />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STAV — Product</title>
 
   <link rel="stylesheet" href="./css/base.css" />
   <link rel="stylesheet" href="./css/layout.css" />
@@ -24,26 +19,13 @@
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="./index.html" aria-label="Go to STAV home page">
         <img src="./assets/STAVLOGO.png" alt="STAV logo" height="36" />
       </a>
-
-      <form
-        class="site-search"
-        role="search"
-        action="./index.html"
-        method="get"
-        aria-label="Search products"
-      >
-        <input
-          name="q"
-          type="search"
-          placeholder="Search for products"
-          aria-label="Search for products"
-        />
-      </form>
 
       <nav class="nav-links" aria-label="Main navigation">
         <a href="./index.html" class="nav-btn">Home</a>
@@ -56,21 +38,21 @@
     </div>
   </header>
 
-  <main class="container">
-    <section id="product-container">
-      <div id="status" role="status" aria-live="polite">Loading product...</div>
+  <main class="container" id="main-content">
+    <section id="product-container" aria-live="polite">
+      <p id="status" role="status">Loading product...</p>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <nav class="footer-buttons" aria-label="Footer navigation">
+      <small>&copy; 2025 STAV</small>
+      <div class="footer-buttons">
         <a href="./index.html" class="footer-btn">Home</a>
         <a href="./account/login.html" class="footer-btn">Login</a>
         <a href="./account/register.html" class="footer-btn">Register</a>
         <a href="./cart.html" class="footer-btn">Cart</a>
-      </nav>
-      <small>&copy; 2025 STAV</small>
+      </div>
     </div>
   </footer>
 

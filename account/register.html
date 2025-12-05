@@ -7,7 +7,7 @@
 
   <meta
     name="description"
-    content="Create a new STAV account to save your details and shop faster."
+    content="Create a new STAV account to save your details and shop more easily."
   />
 
   <link rel="stylesheet" href="../css/base.css" />
@@ -16,10 +16,15 @@
 
   <link rel="icon" href="../assets/STAVLOGO.png" type="image/png" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="../index.html">
@@ -35,19 +40,19 @@
     </div>
   </header>
 
-  <main class="container container--narrow">
+  <main class="container container--narrow" id="main-content">
     <h1>Register</h1>
 
-    <form id="register-form" class="auth-form">
-      <label>Full name
+    <form id="register-form" class="auth-form" novalidate>
+      <label for="reg-name">Full name
         <input type="text" id="reg-name" required placeholder="Jane Doe" />
       </label>
 
-      <label>Email
+      <label for="reg-email">Email
         <input type="email" id="reg-email" required placeholder="you@example.com" />
       </label>
 
-      <label>Password
+      <label for="reg-password">Password
         <input type="password" id="reg-password" required minlength="6" placeholder="********" />
       </label>
 
@@ -73,7 +78,7 @@
       </div>
     </div>
   </footer>
- 
+
   <script type="module" src="../js/global.js"></script>
   <script type="module" src="../js/register.js"></script>
 </body>

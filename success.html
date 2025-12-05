@@ -7,7 +7,7 @@
 
   <meta
     name="description"
-    content="Your order at STAV has been placed successfully. View confirmation details here."
+    content="Your STAV order has been placed successfully."
   />
 
   <link rel="stylesheet" href="./css/base.css" />
@@ -16,10 +16,15 @@
 
   <link rel="icon" href="./assets/STAVLOGO.png" type="image/png" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
 </head>
 
 <body class="page-success">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="./index.html">
@@ -32,7 +37,7 @@
     </div>
   </header>
 
-  <main class="success-container">
+  <main class="success-container" id="main-content">
     <section class="success-message">
       <h1>🎉 Thank you for your purchase!</h1>
       <p id="order-line">Your order is confirmed.</p>
@@ -45,7 +50,7 @@
       <small>&copy; 2025 STAV</small>
     </div>
   </footer>
-  
+
   <script type="module" src="./js/global.js"></script>
   <script type="module" src="./js/success.js"></script>
 </body>
