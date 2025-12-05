@@ -1,19 +1,37 @@
+// api.js
 export const BASE = "https://v2.api.noroff.dev";
 const SHOP = `${BASE}/online-shop`;
 
+/**
+ * Get a page of products.
+ */
 export async function getProducts({ limit = 12, page = 1 } = {}) {
   const qs = new URLSearchParams({ limit, page }).toString();
   const res = await fetch(`${SHOP}?${qs}`);
-  if (!res.ok) throw new Error("Failed to fetch products");
-  return res.json(); 
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch products (status ${res.status})`);
+  }
+
+  return res.json(); // { data, meta }
 }
 
+/**
+ * Get a single product by id.
+ */
 export async function getProduct(id) {
   const res = await fetch(`${SHOP}/${id}`);
-  if (!res.ok) throw new Error("Failed to fetch product");
-  return res.json(); 
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch product (status ${res.status})`);
+  }
+
+  return res.json(); // { data }
 }
 
+/**
+ * Register a new user using Noroff auth API.
+ */
 export async function registerAccount({ name, email, password }) {
   const res = await fetch(`${BASE}/auth/register`, {
     method: "POST",
@@ -25,9 +43,12 @@ export async function registerAccount({ name, email, password }) {
     throw new Error("Registration failed");
   }
 
-  return res.json(); 
+  return res.json(); // { data: { ...user } }
 }
 
+/**
+ * Login a user using Noroff auth API.
+ */
 export async function login({ email, password }) {
   const res = await fetch(`${BASE}/auth/login`, {
     method: "POST",
@@ -39,5 +60,5 @@ export async function login({ email, password }) {
     throw new Error("Login failed");
   }
 
-  return res.json();
+  return res.json(); // { data: { ...user } }
 }

@@ -1,22 +1,4 @@
-function seedDemoUser() {
-  try {
-    const stored = localStorage.getItem("users");
-    const users = stored ? JSON.parse(stored) : [];
-
-    const exists = users.some((u) => u.email === "admin@stud.noroff.no");
-    if (exists) return;
-
-    users.push({
-      name: "Store Owner",
-      email: "admin@stud.noroff.no",
-      password: "Admin123",
-    });
-
-    localStorage.setItem("users", JSON.stringify(users));
-  } catch (error) {
-    console.error("Failed to seed demo user:", error);
-  }
-}
+// global.js
 
 function safeParse(key) {
   try {
@@ -28,6 +10,9 @@ function safeParse(key) {
   }
 }
 
+/**
+ * Update the cart badge in the header.
+ */
 export function updateCartCount() {
   const el = document.getElementById("cart-count");
   if (!el) return;
@@ -37,12 +22,16 @@ export function updateCartCount() {
   el.textContent = total > 0 ? `(${total})` : "";
 }
 
+/**
+ * Update nav: show welcome + logout button if user is logged in.
+ */
 export function updateAuthButtons() {
   const nav = document.querySelector(".nav-links");
   if (!nav) return;
 
   const loggedInUser = safeParse("loggedInUser");
 
+  // Clean up old state
   const oldLogout = nav.querySelector("#logout-btn");
   const oldWelcome = nav.querySelector("#welcome-msg");
   if (oldLogout) oldLogout.remove();
@@ -75,8 +64,6 @@ export function updateAuthButtons() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  seedDemoUser();
-
   updateCartCount();
   updateAuthButtons();
 

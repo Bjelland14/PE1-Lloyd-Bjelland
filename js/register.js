@@ -1,3 +1,4 @@
+// register.js
 import { registerAccount } from "./api.js";
 
 const form = document.getElementById("register-form");
@@ -15,6 +16,7 @@ if (form) {
     const email = emailInput.value.trim();
     const password = passInput.value.trim();
 
+    // Reset state
     msg.className = "form-msg";
     msg.textContent = "";
     nameInput.classList.remove("input-error");
@@ -39,6 +41,7 @@ if (form) {
       msg.classList.add("success-text");
       msg.textContent = "Account created! You can now log in.";
 
+      // Optional: redirect to login after a second
       setTimeout(() => {
         location.href = "./login.html";
       }, 1000);

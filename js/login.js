@@ -1,3 +1,4 @@
+// login.js
 import { login } from "./api.js";
 
 const form = document.getElementById("login-form");
@@ -13,6 +14,7 @@ if (form) {
     const email = emailInput.value.trim();
     const pass = passInput.value.trim();
 
+    // Reset state
     msg.className = "form-msg";
     msg.textContent = "";
     emailInput.classList.remove("input-error");
@@ -32,6 +34,7 @@ if (form) {
     try {
       const result = await login({ email, password: pass });
 
+      // Noroff v2: ofte { data: { name, email, ... } }
       const userData = result.data || result;
 
       localStorage.setItem("loggedInUser", JSON.stringify(userData));

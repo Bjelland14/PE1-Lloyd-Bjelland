@@ -1,4 +1,3 @@
-// checkout.js
 import { updateCartCount } from "./global.js";
 
 const summaryWrap = document.getElementById("summary-items");

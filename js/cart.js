@@ -1,4 +1,4 @@
-console.log("Cart script loaded ");
+console.log("Cart script loaded ✅");
 
 const cartContainer = document.getElementById("cart-items");
 const cartTotal     = document.getElementById("cart-total");
@@ -116,5 +116,5 @@ checkoutBtn?.addEventListener("click", (event) => {
     return;
   }
 
-
+  
 });
