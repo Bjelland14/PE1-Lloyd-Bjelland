@@ -9,6 +9,7 @@ const prevBtn = document.querySelector(".carousel .prev");
 const nextBtn = document.querySelector(".carousel .next");
 
 const featuredGrid = document.getElementById("featured-grid");
+const categoryRow = document.getElementById("category-row");
 
 let idx = 0;
 let slides = [];
@@ -17,8 +18,8 @@ let slides = [];
   try {
     const { data: items } = await getProducts({ limit: 12 });
 
-    const heroProducts = items.slice(0, 3); 
-    const hotProducts = items.slice(3, 7); 
+    const heroProducts = items.slice(0, 3);
+    const hotProducts = items.slice(3, 7);
     const restProducts = items.slice(7);
 
     if (featuredGrid && hotProducts.length) {
@@ -45,10 +46,32 @@ let slides = [];
       wireCarousel();
     }
 
+    if (categoryRow) {
+      categoryRow.innerHTML = `
+        <article class="category-card">
+          <h3>Tech & Gadgets</h3>
+          <p>Headphones, speakers, accessories and more.</p>
+        </article>
+        <article class="category-card">
+          <h3>Home & Lifestyle</h3>
+          <p>Decor, lighting and everyday favourites.</p>
+        </article>
+        <article class="category-card">
+          <h3>Beauty & Care</h3>
+          <p>Popular self-care and wellness picks.</p>
+        </article>
+        <article class="category-card">
+          <h3>On Sale</h3>
+          <p>Products with discounted prices.</p>
+        </article>
+      `;
+    }
+
     if (statusEl) statusEl.textContent = "";
   } catch (err) {
     console.error(err);
-    if (statusEl) statusEl.textContent = err.message || "Something went wrong.";
+    if (statusEl)
+      statusEl.textContent = err.message || "Something went wrong.";
   }
 })();
 

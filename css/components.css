@@ -1,13 +1,18 @@
+
+
 .hero {
-  margin: 1rem 0 2rem;
+  margin: 2rem 0 2.5rem;     
 }
 
 .carousel {
   position: relative;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 18px;
   background: #111;
   color: #fff;
+  max-width: 1200px;         
+  margin: 0 auto;            
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
 
 .track {
@@ -31,7 +36,6 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 0;
 }
 
 .slide .copy {
@@ -41,7 +45,7 @@
   justify-content: center;
   gap: 1rem;
   color: #fff;
-  text-shadow: 0 1px 2px rgba(0,0,0,.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .slide h2 {
@@ -60,6 +64,7 @@
   display: flex;
   gap: 0.75rem;
 }
+
 
 .btn {
   display: inline-flex;
@@ -91,11 +96,6 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-.btn:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(162,210,255,.5);
-  transform: translateY(-1px);
-}
 
 .nav {
   position: absolute;
@@ -119,13 +119,9 @@
   transform: translateY(-50%) scale(1.05);
 }
 
-.nav:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(162,210,255,.6);
-}
-
 .nav.prev { left: 12px; }
 .nav.next { right: 12px; }
+
 
 .dots {
   position: absolute;
@@ -150,61 +146,20 @@
   background: #fff;
 }
 
-.carousel::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 90px;
-  background: linear-gradient(
-    to bottom,
-    rgba(17, 17, 17, 0) 0%,
-    rgba(17, 17, 17, 0.25) 60%,
-    rgba(17, 17, 17, 0.6) 100%
-  );
-  pointer-events: none;
-}
 
 @media (max-width: 900px) {
-  .slide { grid-template-columns: 1fr; }
+  .slide {
+    grid-template-columns: 1fr;
+  }
+
   .slide .copy {
     order: 2;
     background: rgba(0, 0, 0, 0.5);
     padding: 1.5rem;
-    border-radius: 0 0 16px 16px;
   }
+
   .slide img {
     height: 280px;
     object-fit: cover;
   }
-}
-
-/* Categories */
-
-.categories {
-  margin: 2rem 0;
-}
-
-.category-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.category-card {
-  background: #111;
-  color: #fff;
-  padding: 1.25rem 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-
-.category-card h3 {
-  margin: 0 0 .35rem;
-}
-
-.category-card p {
-  margin: 0;
-  font-size: 0.9rem;
-  opacity: 0.9;
 }

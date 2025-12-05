@@ -9,10 +9,13 @@ function renderSummary() {
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   updateCartCount();
 
+  if (!summaryWrap || !summaryTotal || !form) return;
+
+  const submitBtn = form.querySelector("button[type='submit']");
+
   if (!cart.length) {
     summaryWrap.innerHTML = "<p>Your cart is empty.</p>";
     summaryTotal.textContent = "Total: 0 NOK";
-    const submitBtn = form.querySelector("button[type='submit']");
     if (submitBtn) submitBtn.setAttribute("disabled", "disabled");
     return;
   }
@@ -27,7 +30,9 @@ function renderSummary() {
       return `
         <div class="checkout-item">
           <div class="checkout-item-inner">
-            <img src="${item.image?.url}" alt="${item.title}" class="checkout-item-thumb">
+            <img src="${item.image?.url}" alt="${
+        item.title
+      }" class="checkout-item-thumb">
             <div>
               <strong>${item.title}</strong>
               <div class="checkout-item-meta">
@@ -44,7 +49,6 @@ function renderSummary() {
     .join("");
 
   summaryTotal.textContent = `Total: ${total.toFixed(2)} NOK`;
-  const submitBtn = form.querySelector("button[type='submit']");
   if (submitBtn) submitBtn.removeAttribute("disabled");
 }
 
@@ -71,7 +75,8 @@ form.addEventListener("submit", (e) => {
     return;
   }
 
-  const orderId = "STAV-" + Math.random().toString(36).slice(2, 8).toUpperCase();
+  const orderId =
+    "STAV-" + Math.random().toString(36).slice(2, 8).toUpperCase();
 
   localStorage.removeItem("cart");
   updateCartCount();

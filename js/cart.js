@@ -1,10 +1,10 @@
 console.log("Cart script loaded ✅");
 
 const cartContainer = document.getElementById("cart-items");
-const cartTotal     = document.getElementById("cart-total");
-const clearBtn      = document.getElementById("clear-cart");
-const checkoutBtn   = document.getElementById("go-checkout");
-const cartCountEl   = document.getElementById("cart-count");
+const cartTotal = document.getElementById("cart-total");
+const clearBtn = document.getElementById("clear-cart");
+const checkoutBtn = document.getElementById("go-checkout");
+const cartCountEl = document.getElementById("cart-count");
 
 renderCart();
 updateCartCount();
@@ -28,6 +28,8 @@ function updateCartCount() {
 function renderCart() {
   const cart = safeCart();
 
+  if (!cartContainer || !cartTotal) return;
+
   if (cart.length === 0) {
     cartContainer.innerHTML = "<p>Your cart is empty.</p>";
     cartTotal.textContent = "Total: 0 NOK";
@@ -42,16 +44,23 @@ function renderCart() {
   cartContainer.innerHTML = cart
     .map((item, i) => {
       const price = item.discountedPrice ?? item.price ?? 0;
-      const qty   = item.qty || 1;
-      const sub   = price * qty;
+      const qty = item.qty || 1;
+      const sub = price * qty;
       total += sub;
 
       return `
         <div class="cart-item">
-          <img src="${item.image?.url || ""}" alt="${item.title || "Product"}" />
+          <img src="${item.image?.url || ""}" alt="${
+        item.title || "Product"
+      }" />
           <div>
             <h3>${item.title || "Product"}</h3>
-            <p>${price.toFixed(2)} NOK × ${qty}</p>
+            <p>${price.toFixed(2)} NOK per item</p>
+          </div>
+          <div class="cart-qty">
+            <button type="button" class="qty-btn" data-index="${i}" data-dir="-">−</button>
+            <span>${qty}</span>
+            <button type="button" class="qty-btn" data-index="${i}" data-dir="+">+</button>
           </div>
           <strong>${sub.toFixed(2)} NOK</strong>
           <button class="remove-btn" data-index="${i}" aria-label="Remove item">✕</button>
@@ -64,6 +73,27 @@ function renderCart() {
 
   checkoutBtn?.removeAttribute("aria-disabled");
   checkoutBtn?.classList.remove("disabled");
+
+  document.querySelectorAll(".qty-btn").forEach((btn) =>
+    btn.addEventListener("click", (e) => {
+      const index = Number(e.currentTarget.dataset.index);
+      const dir = e.currentTarget.dataset.dir;
+      const cartNow = safeCart();
+      const item = cartNow[index];
+      if (!item) return;
+
+      if (dir === "+") {
+        item.qty = (item.qty || 1) + 1;
+      } else if (dir === "-") {
+        item.qty = (item.qty || 1) - 1;
+        if (item.qty <= 0) cartNow.splice(index, 1);
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cartNow));
+      renderCart();
+      updateCartCount();
+    })
+  );
 
   document.querySelectorAll(".remove-btn").forEach((btn) =>
     btn.addEventListener("click", (e) => {

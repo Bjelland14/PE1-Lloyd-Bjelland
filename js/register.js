@@ -11,8 +11,17 @@ if (form) {
 
     const users = JSON.parse(localStorage.getItem("users") || "[]");
 
+    msg.className = "form-msg";
+    msg.textContent = "";
+
+    if (!name || !email || !pass) {
+      msg.classList.add("error-text");
+      msg.textContent = "Please fill in all fields.";
+      return;
+    }
+
     if (users.find((u) => u.email === email)) {
-      msg.className = "form-msg error-text";
+      msg.classList.add("error-text");
       msg.textContent = "Email already registered.";
       return;
     }
@@ -20,7 +29,7 @@ if (form) {
     users.push({ name, email, password: pass });
     localStorage.setItem("users", JSON.stringify(users));
 
-    msg.className = "form-msg success-text";
+    msg.classList.add("success-text");
     msg.textContent = "Registration successful! Redirecting...";
 
     setTimeout(() => (location.href = "./login.html"), 1200);

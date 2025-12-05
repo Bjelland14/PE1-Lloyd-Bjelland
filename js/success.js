@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (line && order) {
     line.textContent = `Your order number is ${order}. A confirmation has been sent to your email.`;
   } else if (line) {
-    line.textContent = "Your order is confirmed. A confirmation has been sent to your email.";
+    line.textContent =
+      "Your order is confirmed. A confirmation has been sent to your email.";
   }
 
   const message = document.querySelector(".success-message");

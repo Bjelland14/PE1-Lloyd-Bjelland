@@ -30,24 +30,38 @@ const cartCountEl = document.getElementById("cart-count");
 function renderProduct(p) {
   const hasDiscount = p.discountedPrice && p.discountedPrice < p.price;
   const price = hasDiscount
-    ? `<s>${p.price.toFixed(2)} NOK</s> <strong>${p.discountedPrice.toFixed(2)} NOK</strong>`
+    ? `<s>${p.price.toFixed(2)} NOK</s> <strong>${p.discountedPrice.toFixed(
+        2
+      )} NOK</strong>`
     : `<strong>${p.price.toFixed(2)} NOK</strong>`;
 
   const rating = Math.max(0, Math.min(5, p.rating || 0));
   const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
 
   const tags = Array.isArray(p.tags)
-    ? p.tags.map(t => `<span>#${t}</span>`).join(" ")
+    ? p.tags.map((t) => `<span>#${t}</span>`).join(" ")
     : "";
 
-  const reviews = Array.isArray(p.reviews) && p.reviews.length
-    ? p.reviews.map(r => `
+  const reviews =
+    Array.isArray(p.reviews) && p.reviews.length
+      ? p.reviews
+          .map(
+            (r) => `
         <li class="review-item">
           <p><strong>${r.username}</strong></p>
-          <p class="stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</p>
+          <p class="stars">${"★".repeat(r.rating)}${"☆".repeat(
+              5 - r.rating
+            )}</p>
           <p>${r.description}</p>
-        </li>`).join("")
-    : "<li>No reviews yet.</li>";
+        </li>`
+          )
+          .join("")
+      : "<li>No reviews yet.</li>";
+
+  const loggedInUser = JSON.parse(
+    localStorage.getItem("loggedInUser") || "null"
+  );
+  const canAddToCart = !!loggedInUser;
 
   container.innerHTML = `
     <article class="product">
@@ -63,7 +77,11 @@ function renderProduct(p) {
         <div class="tags">${tags}</div>
 
         <div class="actions">
-          <button id="addToCartBtn" class="primary">Add to Cart</button>
+          ${
+            canAddToCart
+              ? `<button id="addToCartBtn" class="primary">Add to Cart</button>`
+              : `<a href="./account/login.html" class="primary-btn">Login to add to cart</a>`
+          }
           <button id="shareBtn" class="secondary">Share</button>
         </div>
       </div>
@@ -87,7 +105,7 @@ function setupButtons(p) {
 
   addBtn?.addEventListener("click", () => {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const existing = cart.find(i => i.id === p.id);
+    const existing = cart.find((i) => i.id === p.id);
 
     if (existing) {
       existing.qty += 1;
@@ -131,21 +149,22 @@ function setupButtons(p) {
 function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   const totalItems = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
-  if (cartCountEl) {
+  if (cartCountEl)
     cartCountEl.textContent = totalItems > 0 ? `(${totalItems})` : "";
-  }
 }
 
 async function renderRecommendations(currentId) {
   try {
     const { data: products } = await getProducts({ limit: 12 });
-    const others = products.filter(p => p.id !== currentId);
+    const others = products.filter((p) => p.id !== currentId);
     const picks = others.sort(() => 0.5 - Math.random()).slice(0, 3);
 
     const grid = document.getElementById("recommendation-grid");
     if (!grid) return;
 
-    grid.innerHTML = picks.map(p => `
+    grid.innerHTML = picks
+      .map(
+        (p) => `
       <a class="card" href="./product.html?id=${p.id}">
         <div class="thumb">
           <img src="${p.image?.url}" alt="${p.image?.alt || p.title}" loading="lazy">
@@ -153,7 +172,9 @@ async function renderRecommendations(currentId) {
         <h3>${p.title}</h3>
         <p><strong>${(p.discountedPrice ?? p.price).toFixed(2)} NOK</strong></p>
       </a>
-    `).join("");
+    `
+      )
+      .join("");
   } catch (err) {
     console.error("Failed to load recommendations:", err);
   }
