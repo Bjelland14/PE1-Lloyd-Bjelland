@@ -5,29 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STAV — Register</title>
 
+  <meta
+    name="description"
+    content="Create a new STAV account to save your details and shop faster."
+  />
+
   <link rel="stylesheet" href="../css/base.css" />
   <link rel="stylesheet" href="../css/layout.css" />
   <link rel="stylesheet" href="../css/pages.css" />
 
   <link rel="icon" href="../assets/STAVLOGO.png" type="image/png" />
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="../index.html">
-        <img src="../assets/STAVLOGO.png" alt="STAV" height="36" />
+        <img src="../assets/STAVLOGO.png" alt="STAV logo" height="36" />
       </a>
 
       <nav class="nav-links">
         <a href="../index.html" class="nav-btn">Home</a>
         <a href="./login.html" class="nav-btn">Login</a>
-        <a href="./register.html" class="nav-btn">Register</a>
+        <a href="./register.html" class="nav-btn nav-btn--active">Register</a>
         <a href="../cart.html" class="nav-btn">🛒 Cart <span id="cart-count"></span></a>
       </nav>
     </div>
@@ -37,7 +39,6 @@
     <h1>Register</h1>
 
     <form id="register-form" class="auth-form">
-
       <label>Full name
         <input type="text" id="reg-name" required placeholder="Jane Doe" />
       </label>
@@ -58,7 +59,6 @@
         Already have an account?
         <a href="./login.html">Login here</a>
       </p>
-
     </form>
   </main>
 
@@ -73,9 +73,8 @@
       </div>
     </div>
   </footer>
-
+ 
   <script type="module" src="../js/global.js"></script>
   <script type="module" src="../js/register.js"></script>
-
 </body>
 </html>

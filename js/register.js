@@ -1,57 +1,28 @@
-// register.js
-import { registerAccount } from "./api.js";
-
 const form = document.getElementById("register-form");
 const msg = document.getElementById("register-msg");
 
 if (form) {
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const nameInput = document.getElementById("reg-name");
-    const emailInput = document.getElementById("reg-email");
-    const passInput = document.getElementById("reg-password");
+    const name = document.getElementById("reg-name").value.trim();
+    const email = document.getElementById("reg-email").value.trim();
+    const pass = document.getElementById("reg-password").value.trim();
 
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const password = passInput.value.trim();
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
 
-    // Reset state
-    msg.className = "form-msg";
-    msg.textContent = "";
-    nameInput.classList.remove("input-error");
-    emailInput.classList.remove("input-error");
-    passInput.classList.remove("input-error");
-
-    if (!name || !email || !password) {
-      msg.classList.add("error-text");
-      msg.textContent = "Please fill in all fields.";
-      if (!name) nameInput.classList.add("input-error");
-      if (!email) emailInput.classList.add("input-error");
-      if (!password) passInput.classList.add("input-error");
+    if (users.find((u) => u.email === email)) {
+      msg.className = "form-msg error-text";
+      msg.textContent = "Email already registered.";
       return;
     }
 
-    const submitBtn = form.querySelector("button[type='submit']");
-    if (submitBtn) submitBtn.disabled = true;
+    users.push({ name, email, password: pass });
+    localStorage.setItem("users", JSON.stringify(users));
 
-    try {
-      await registerAccount({ name, email, password });
+    msg.className = "form-msg success-text";
+    msg.textContent = "Registration successful! Redirecting...";
 
-      msg.classList.add("success-text");
-      msg.textContent = "Account created! You can now log in.";
-
-      // Optional: redirect to login after a second
-      setTimeout(() => {
-        location.href = "./login.html";
-      }, 1000);
-    } catch (error) {
-      console.error("Register error:", error);
-      msg.classList.add("error-text");
-      msg.textContent =
-        error.message || "Registration failed. Please try again.";
-    } finally {
-      if (submitBtn) submitBtn.disabled = false;
-    }
+    setTimeout(() => (location.href = "./login.html"), 1200);
   });
 }

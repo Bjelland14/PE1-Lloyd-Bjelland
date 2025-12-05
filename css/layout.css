@@ -1,18 +1,26 @@
-html,
-body {
+html, body {
   height: 100%;
+  margin: 0;
 }
 
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #111;
+
+  background: #f5f5f5;
 }
 
 main {
   flex: 1;
 }
 
+/* HEADER */
 
 .site-header {
   background: #fff;
@@ -57,10 +65,34 @@ main {
   gap: 1rem;
 }
 
+.nav-links a,
+.nav-btn {
+  background: #a2d2ff;
+  color: #1e1e1e;
+  padding: 0.6rem 1.3rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.nav-btn--active {
+  box-shadow: 0 0 0 2px #111;
+}
+
+.nav-links a:hover,
+.nav-btn:hover {
+  background: #91c4f2;
+  transform: translateY(-2px);
+}
+
 #welcome-msg {
   font-weight: 600;
   color: #333;
-  margin-right: 0.75rem;
 }
 
 #logout-btn {
@@ -74,7 +106,7 @@ main {
   transform: translateY(-2px);
 }
 
-
+/* FOOTER */
 
 .site-footer {
   background: #f9f9f9;
@@ -98,16 +130,37 @@ main {
   gap: 1rem;
 }
 
+.footer-btn {
+  background: #a2d2ff;
+  color: #1e1e1e;
+  padding: 0.6rem 1.3rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,.05);
+}
+
+.footer-btn:hover {
+  background: #91c4f2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,.1);
+}
+
 .footer-inner small {
   font-size: 0.9rem;
   color: #555;
 }
 
-
+/* UTILITIES & LAYOUT HELPERS */
 
 @media (max-width: 900px) {
   .header-inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; 
   }
 
   .nav-links {
@@ -122,8 +175,6 @@ main {
     align-items: center;
   }
 }
-
-
 
 .container--narrow {
   max-width: 420px;
@@ -146,7 +197,6 @@ main {
   margin-top: .75rem;
 }
 
-
 .checkout-form {
   max-width: 520px;
   margin: 2rem 0;
@@ -158,4 +208,52 @@ main {
   align-items: center;
   padding: .75rem 1.25rem;
   border-radius: 8px;
+}
+
+.error-text {
+  color: #c1121f;
+}
+
+.success-text {
+  color: #2e7d32;
+}
+
+.input-error {
+  border-color: #c1121f !important;
+}
+
+/* Buttons */
+
+.primary {
+  background-color: #a2d2ff;
+  color: #1e1e1e;
+  padding: 0.85rem 1.7rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.25s ease, transform 0.15s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.primary:hover {
+  background-color: #91c4f2;
+  transform: translateY(-2px);
+}
+
+.secondary {
+  background: transparent;
+  color: #1e1e1e;
+  border: 2px solid #1e1e1e;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.secondary:hover {
+  background: #1e1e1e;
+  color: #fff;
+  transform: translateY(-2px);
 }

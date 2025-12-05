@@ -1,96 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Log in to your STAV account to manage your cart and complete purchases."
-    />
-    <title>STAV — Login</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STAV — Login</title>
 
-    <link rel="stylesheet" href="../css/base.css" />
-    <link rel="stylesheet" href="../css/layout.css" />
-    <link rel="stylesheet" href="../css/pages.css" />
+  <meta
+    name="description"
+    content="Login to your STAV account to manage your cart and complete purchases."
+  />
 
-    <link rel="icon" href="../assets/STAVLOGO.png" type="image/png" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+  <link rel="icon" href="../assets/STAVLOGO.png" type="image/png" />
 
-  <body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
 
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="logo" href="../index.html">
-          <img src="../assets/STAVLOGO.png" alt="STAV home" height="36" />
-        </a>
-        <nav class="nav-links" aria-label="Main navigation">
-          <a href="../index.html" class="nav-btn">Home</a>
-          <a href="./login.html" class="nav-btn" aria-current="page">Login</a>
-          <a href="./register.html" class="nav-btn">Register</a>
-          <a href="../cart.html" class="nav-btn">
-            🛒 Cart <span id="cart-count"></span>
-          </a>
-        </nav>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../index.html">
+        <img src="../assets/STAVLOGO.png" alt="STAV logo" height="36" />
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html" class="nav-btn">Home</a>
+        <a href="./login.html" class="nav-btn nav-btn--active">Login</a>
+        <a href="./register.html" class="nav-btn">Register</a>
+        <a href="../cart.html" class="nav-btn">🛒 Cart <span id="cart-count"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container container--narrow">
+    <h1>Login</h1>
+
+    <form id="login-form" class="auth-form">
+      <label>Email
+        <input type="email" id="login-email" required placeholder="you@example.com" />
+      </label>
+
+      <label>Password
+        <input type="password" id="login-password" required placeholder="********" />
+      </label>
+
+      <button type="submit" class="primary">Login</button>
+      <p id="login-msg" class="form-msg"></p>
+
+      <p class="mt-1">
+        Don’t have an account?
+        <a href="./register.html">Register here</a>
+      </p>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>&copy; 2025 STAV</small>
+      <div class="footer-buttons">
+        <a href="../index.html" class="footer-btn">Home</a>
+        <a href="./login.html" class="footer-btn">Login</a>
+        <a href="./register.html" class="footer-btn">Register</a>
+        <a href="../cart.html" class="footer-btn">Cart</a>
       </div>
-    </header>
+    </div>
+  </footer>
 
-    <main class="container container--narrow" id="main-content">
-      <h1>Login</h1>
-
-      <form id="login-form" class="auth-form">
-        <label>
-          Email
-          <input
-            type="email"
-            id="login-email"
-            name="email"
-            required
-            autocomplete="email"
-            placeholder="you@example.com"
-          />
-        </label>
-
-        <label>
-          Password
-          <input
-            type="password"
-            id="login-password"
-            name="password"
-            required
-            autocomplete="current-password"
-            placeholder="********"
-          />
-        </label>
-
-        <button type="submit" class="primary">Login</button>
-        <p id="login-msg" class="form-msg"></p>
-
-        <p class="mt-1">
-          Don’t have an account?
-          <a href="./register.html">Register here</a>
-        </p>
-      </form>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <small>&copy; 2025 STAV</small>
-        <nav class="footer-buttons" aria-label="Footer navigation">
-          <a href="../index.html" class="footer-btn">Home</a>
-          <a href="./login.html" class="footer-btn" aria-current="page">Login</a>
-          <a href="./register.html" class="footer-btn">Register</a>
-          <a href="../cart.html" class="footer-btn">Cart</a>
-        </nav>
-      </div>
-    </footer>
-
-    <script type="module" src="../js/global.js"></script>
-    <script type="module" src="../js/login.js"></script>
-  </body>
+  <script type="module" src="../js/global.js"></script>
+  <script type="module" src="../js/login.js"></script>
+</body>
 </html>

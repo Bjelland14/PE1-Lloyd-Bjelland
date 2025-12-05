@@ -1,37 +1,16 @@
-// global.js
-
-function safeParse(key) {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : null;
-  } catch (e) {
-    console.error(`Failed to parse localStorage key "${key}":`, e);
-    return null;
-  }
-}
-
-/**
- * Update the cart badge in the header.
- */
 export function updateCartCount() {
   const el = document.getElementById("cart-count");
-  if (!el) return;
-
-  const cart = safeParse("cart") || [];
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   const total = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
-  el.textContent = total > 0 ? `(${total})` : "";
+  if (el) el.textContent = total > 0 ? `(${total})` : "";
 }
 
-/**
- * Update nav: show welcome + logout button if user is logged in.
- */
 export function updateAuthButtons() {
   const nav = document.querySelector(".nav-links");
   if (!nav) return;
 
-  const loggedInUser = safeParse("loggedInUser");
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser") || "null");
 
-  // Clean up old state
   const oldLogout = nav.querySelector("#logout-btn");
   const oldWelcome = nav.querySelector("#welcome-msg");
   if (oldLogout) oldLogout.remove();
@@ -50,12 +29,7 @@ export function updateAuthButtons() {
     logoutBtn.addEventListener("click", () => {
       localStorage.removeItem("loggedInUser");
       alert("You have been logged out.");
-
-      if (location.pathname.includes("/account/")) {
-        location.href = "../index.html";
-      } else {
-        location.href = "./index.html";
-      }
+      location.href = "./index.html";
     });
 
     nav.appendChild(welcome);
@@ -67,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
   updateAuthButtons();
 
-  const loggedInUser = safeParse("loggedInUser");
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser") || "null");
   const banner = document.getElementById("welcome-banner");
 
   if (banner && loggedInUser) {

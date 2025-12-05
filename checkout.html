@@ -1,133 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="STAV — Checkout page to review your order and enter delivery and payment details."
-    />
-    <title>STAV — Checkout</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>STAV — Checkout</title>
 
-    <link rel="stylesheet" href="./css/base.css" />
-    <link rel="stylesheet" href="./css/layout.css" />
-    <link rel="stylesheet" href="./css/pages.css" />
+  <meta
+    name="description"
+    content="Enter your delivery details and payment information to complete your order at STAV."
+  />
 
-    <link rel="icon" href="./assets/STAVLOGO.png" type="image/png" />
+  <link rel="stylesheet" href="./css/base.css"/>
+  <link rel="stylesheet" href="./css/layout.css"/>
+  <link rel="stylesheet" href="./css/pages.css"/>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+  <link rel="icon" href="./assets/STAVLOGO.png" type="image/png" />
 
-  <body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
 
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="logo" href="./index.html">
-          <img src="./assets/STAVLOGO.png" alt="STAV home" height="36" />
-        </a>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="./index.html">
+        <img src="./assets/STAVLOGO.png" alt="STAV logo" height="36"/>
+      </a>
+      <nav class="nav-links">
+        <a href="./index.html" class="nav-btn">Home</a>
+        <a href="./cart.html" class="nav-btn">🛒 Cart <span id="cart-count"></span></a>
+      </nav>
+    </div>
+  </header>
 
-        <nav class="nav-links" aria-label="Main navigation">
-          <a href="./index.html" class="nav-btn">Home</a>
-          <a href="./account/login.html" class="nav-btn">Login</a>
-          <a href="./account/register.html" class="nav-btn">Register</a>
-          <a href="./cart.html" class="nav-btn">
-            🛒 Cart <span id="cart-count"></span>
-          </a>
-        </nav>
+  <main class="container container--narrow">
+    <h1>Checkout</h1>
+
+    <section id="order-summary" class="panel">
+      <h2>Order Summary</h2>
+      <div id="summary-items"></div>
+      <h3 id="summary-total" class="mt-1">Total: 0 NOK</h3>
+    </section>
+
+    <form id="checkout-form" class="checkout-form">
+      <h2>Delivery details</h2>
+
+      <label>Full name
+        <input id="fullName" type="text" required placeholder="Jane Doe"/>
+      </label>
+
+      <label>Email
+        <input id="email" type="email" required placeholder="jane@example.com"/>
+      </label>
+
+      <label>Address
+        <input id="address" type="text" required placeholder="Street 1, 1234 City"/>
+      </label>
+
+      <h2 class="mt-15">Payment</h2>
+      <label>Card number
+        <input id="card" inputmode="numeric" pattern="[0-9 ]{12,19}" required placeholder="1234 5678 9012 3456"/>
+      </label>
+
+      <div class="actions mt-125">
+        <a href="./cart.html" class="secondary back-to-cart-btn">Back to Cart</a>
+        <button type="submit" class="primary">Confirm Purchase</button>
       </div>
-    </header>
 
-    <main class="container container--narrow" id="main-content">
-      <h1>Checkout</h1>
+      <p id="checkout-error" role="alert" class="error-text mt-075"></p>
+    </form>
+  </main>
 
-      <section id="order-summary" class="panel">
-        <h2>Order Summary</h2>
-        <div id="summary-items"></div>
-        <h3 id="summary-total" class="mt-1">Total: 0 NOK</h3>
-      </section>
-
-      <form id="checkout-form" class="checkout-form">
-        <h2>Delivery details</h2>
-
-        <label>
-          Full name
-          <input
-            id="fullName"
-            name="fullName"
-            type="text"
-            required
-            autocomplete="name"
-            placeholder="Jane Doe"
-          />
-        </label>
-
-        <label>
-          Email
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            autocomplete="email"
-            placeholder="jane@example.com"
-          />
-        </label>
-
-        <label>
-          Address
-          <input
-            id="address"
-            name="address"
-            type="text"
-            required
-            autocomplete="street-address"
-            placeholder="Street 1, 1234 City"
-          />
-        </label>
-
-        <h2 class="mt-15">Payment</h2>
-
-        <label>
-          Card number
-          <input
-            id="card"
-            name="cardNumber"
-            inputmode="numeric"
-            pattern="[0-9 ]{12,19}"
-            required
-            autocomplete="cc-number"
-            placeholder="1234 5678 9012 3456"
-          />
-        </label>
-
-        <div class="actions mt-125">
-          <a href="./cart.html" class="secondary back-to-cart-btn">
-            Back to Cart
-          </a>
-          <button type="submit" class="primary">Confirm Purchase</button>
-        </div>
-
-        <p id="checkout-error" role="alert" class="error-text mt-075"></p>
-      </form>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <small>&copy; 2025 STAV</small>
-        <nav class="footer-buttons" aria-label="Footer navigation">
-          <a href="index.html" class="footer-btn">Home</a>
-          <a href="./account/login.html" class="footer-btn">Login</a>
-          <a href="./account/register.html" class="footer-btn">Register</a>
-          <a href="./cart.html" class="footer-btn">Cart</a>
-        </nav>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>&copy; 2025 STAV</small>
+      <div class="footer-buttons">
+        <a href="./index.html" class="footer-btn">Home</a>
+        <a href="./account/login.html" class="footer-btn">Login</a>
+        <a href="./account/register.html" class="footer-btn">Register</a>
+        <a href="./cart.html" class="footer-btn">Cart</a>
       </div>
-    </footer>
+    </div>
+  </footer>
 
-    <script type="module" src="./js/global.js"></script>
-    <script type="module" src="./js/checkout.js"></script>
-  </body>
+  <script type="module" src="./js/global.js"></script>
+  <script type="module" src="./js/checkout.js"></script>
+</body>
 </html>

@@ -16,12 +16,6 @@
   width: 100%;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .track {
-    transition: none;
-  }
-}
-
 .slide {
   position: relative;
   min-width: 100%;
@@ -75,12 +69,7 @@
   border-radius: 8px;
   font-weight: 600;
   text-decoration: none;
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
-  cursor: pointer;
-  border: 0;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn.light {
@@ -161,11 +150,6 @@
   background: #fff;
 }
 
-.dots button:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(162,210,255,.9);
-}
-
 .carousel::after {
   content: "";
   position: absolute;
@@ -182,19 +166,19 @@
 
 @media (max-width: 900px) {
   .slide { grid-template-columns: 1fr; }
-
   .slide .copy {
     order: 2;
     background: rgba(0, 0, 0, 0.5);
     padding: 1.5rem;
     border-radius: 0 0 16px 16px;
   }
-
   .slide img {
     height: 280px;
     object-fit: cover;
   }
 }
+
+/* Categories */
 
 .categories {
   margin: 2rem 0;
@@ -213,13 +197,6 @@
   padding: 1.25rem 1.5rem;
   border-radius: 16px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.category-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 }
 
 .category-card h3 {
