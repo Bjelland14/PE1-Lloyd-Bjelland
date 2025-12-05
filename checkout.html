@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STAV — Checkout</title>
 
+  <meta
+    name="description"
+    content="Complete your STAV order by reviewing your cart total, entering delivery details, and choosing a payment method."
+  />
+
   <link rel="stylesheet" href="./css/base.css" />
   <link rel="stylesheet" href="./css/layout.css" />
   <link rel="stylesheet" href="./css/pages.css" />
@@ -17,58 +22,134 @@
   />
 </head>
 
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="./index.html" aria-label="Go to STAV home page">
+        <img src="./assets/STAVLOGO.png" alt="STAV logo" height="36" />
+      </a>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="logo" href="./index.html">
-      <img src="./assets/STAVLOGO.png" alt="STAV" height="36"/>
-    </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="./index.html" class="nav-btn">Home</a>
+        <a href="./account/login.html" class="nav-btn">Login</a>
+        <a href="./account/register.html" class="nav-btn">Register</a>
+        <a href="./cart.html" class="nav-btn">
+          🛒 Cart <span id="cart-count" aria-live="polite"></span>
+        </a>
+      </nav>
+    </div>
+  </header>
 
-    <nav class="nav-links">
-      <a href="./index.html" class="nav-btn">Home</a>
-      <a href="./account/login.html" class="nav-btn">Login</a>
-      <a href="./account/register.html" class="nav-btn">Register</a>
-      <a href="./cart.html" class="nav-btn">🛒 Cart <span id="cart-count"></span></a>
-    </nav>
-  </div>
-</header>
+  <main class="container container--narrow" aria-labelledby="checkout-heading">
+    <h1 id="checkout-heading">Checkout</h1>
 
-
-<main class="container container--narrow">
-  <h1>Checkout</h1>
-
-    <section id="order-summary" class="panel">
-      <h2>Order Summary</h2>
-      <div id="summary-items"></div>
+    <section id="order-summary" class="panel" aria-labelledby="order-summary-heading">
+      <h2 id="order-summary-heading">Order Summary</h2>
+      <div id="summary-items" aria-live="polite" aria-busy="false"></div>
       <h3 id="summary-total" class="mt-1">Total: 0 NOK</h3>
     </section>
 
-    <form id="checkout-form" class="checkout-form">
+    <form id="checkout-form" class="checkout-form" novalidate>
       <h2>Delivery details</h2>
 
-      <label>Full name
-        <input id="fullName" type="text" required placeholder="Jane Doe"/>
+      <label for="fullName">
+        Full name
+        <input
+          id="fullName"
+          name="fullName"
+          type="text"
+          required
+          placeholder="Jane Doe"
+          autocomplete="name"
+        />
       </label>
 
-      <label>Email
-        <input id="email" type="email" required placeholder="jane@example.com"/>
+      <label for="email">
+        Email
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          placeholder="jane@example.com"
+          autocomplete="email"
+        />
       </label>
 
-      <label>Address
-        <input id="address" type="text" required placeholder="Street 1, 1234 City"/>
+      <label for="address">
+        Address
+        <input
+          id="address"
+          name="address"
+          type="text"
+          required
+          placeholder="Street 1, 1234 City"
+          autocomplete="street-address"
+        />
       </label>
 
       <h2 class="mt-15">Payment</h2>
-      <label>Card number
-        <input id="card" inputmode="numeric" pattern="[0-9 ]{12,19}" required placeholder="1234 5678 9012 3456"/>
+
+      <fieldset class="payment-methods">
+        <legend>Select payment method</legend>
+
+        <label>
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="card"
+            checked
+          />
+          Credit / Debit Card
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="paypal"
+          />
+          PayPal (fictional)
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="bank"
+          />
+          Bank Transfer
+        </label>
+      </fieldset>
+
+      <label for="card">
+        Card number
+        <input
+          id="card"
+          name="card"
+          inputmode="numeric"
+          pattern="[0-9 ]{12,19}"
+          required
+          placeholder="1234 5678 9012 3456"
+          autocomplete="cc-number"
+        />
       </label>
 
       <div class="actions mt-125">
-      <a href="./cart.html" class="secondary back-to-cart-btn">Back to Cart</a>
-        <button type="submit" class="primary">Confirm Purchase</button>
+        <a href="./cart.html" class="secondary back-to-cart-btn">
+          Back to Cart
+        </a>
+        <button type="submit" class="primary">
+          Confirm Purchase
+        </button>
       </div>
 
-      <p id="checkout-error" role="alert" class="error-text mt-075"></p>
+      <p
+        id="checkout-error"
+        role="alert"
+        aria-live="polite"
+        class="error-text mt-075"
+      ></p>
     </form>
   </main>
 
@@ -76,10 +157,10 @@
     <div class="container footer-inner">
       <small>&copy; 2025 STAV</small>
       <div class="footer-buttons">
-        <a href="index.html" class="footer-btn">Home</a>
+        <a href="./index.html" class="footer-btn">Home</a>
         <a href="./account/login.html" class="footer-btn">Login</a>
-        <a href="./cart.html" class="footer-btn">Cart</a>
         <a href="./account/register.html" class="footer-btn">Register</a>
+        <a href="./cart.html" class="footer-btn">Cart</a>
       </div>
     </div>
   </footer>

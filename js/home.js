@@ -1,3 +1,4 @@
+// home.js
 import { getProducts } from "./api.js";
 
 const grid = document.getElementById("products-grid");
@@ -12,30 +13,37 @@ const featuredGrid = document.getElementById("featured-grid");
 
 let idx = 0;
 let slides = [];
-
 let allProducts = [];
 
+/**
+ * Render product grid cards.
+ */
 function renderGrid(products) {
   if (!grid) return;
   grid.innerHTML = products.map(card).join("");
 }
 
+/**
+ * Initial load: fetch products and set up hero, featured, and grid.
+ */
 (async () => {
   try {
     const { data: items } = await getProducts({ limit: 12 });
 
-    allProducts = items; 
+    allProducts = items;
 
     const heroProducts = items.slice(0, 3);
     const hotProducts = items.slice(3, 7);
-    const restProducts = items.slice(7);
 
+    // Featured / "Hot right now"
     if (featuredGrid && hotProducts.length) {
       featuredGrid.innerHTML = hotProducts.map(featuredCard).join("");
     }
 
-    renderGrid(restProducts);
+    // Grid viser alle produktene (oppgaven: minst 12 i grid)
+    renderGrid(items);
 
+    // Hero carousel
     if (track && dotsEl && heroProducts.length) {
       track.innerHTML = heroProducts.map(slideHTML).join("");
 
@@ -59,33 +67,47 @@ function renderGrid(products) {
   }
 })();
 
+/**
+ * Format price with discount logic.
+ */
 function formatPrice(p) {
+  const base = typeof p.price === "number" ? p.price : 0;
   const value =
-    p.discountedPrice && p.discountedPrice < p.price
+    typeof p.discountedPrice === "number" && p.discountedPrice < base
       ? p.discountedPrice
-      : p.price;
+      : base;
 
   return `<strong>${value.toFixed(2)} NOK</strong>`;
 }
 
+/**
+ * Regular product card for grid.
+ */
 function card(p) {
   const price = formatPrice(p);
+  const imageUrl = p.image?.url || "";
+  const altText = p.image?.alt || p.title || "Product";
 
   return `
     <a class="card" href="./product.html?id=${p.id}">
-      <img src="${p.image?.url}" alt="${p.image?.alt || p.title}">
+      <img src="${imageUrl}" alt="${altText}">
       <h3>${p.title}</h3>
       <p>${price}</p>
     </a>
   `;
 }
 
+/**
+ * Featured product card ("Hot right now").
+ */
 function featuredCard(p) {
   const price = formatPrice(p);
+  const imageUrl = p.image?.url || "";
+  const altText = p.image?.alt || p.title || "Product";
 
   return `
     <a class="card featured-card" href="./product.html?id=${p.id}">
-      <img src="${p.image?.url}" alt="${p.image?.alt || p.title}">
+      <img src="${imageUrl}" alt="${altText}">
       <div class="featured-info">
         <h3>${p.title}</h3>
         <p class="price">${price}</p>
@@ -95,11 +117,17 @@ function featuredCard(p) {
   `;
 }
 
+/**
+ * Hero carousel slide.
+ */
 function slideHTML(p) {
   const href = `./product.html?id=${p.id}`;
+  const imageUrl = p.image?.url || "";
+  const altText = p.image?.alt || p.title || "Product";
+
   return `
     <article class="slide">
-      <img src="${p.image?.url}" alt="${p.image?.alt || p.title}">
+      <img src="${imageUrl}" alt="${altText}">
       <div class="copy">
         <h2>${p.title}</h2>
         <p>${p.description || ""}</p>
@@ -112,6 +140,9 @@ function slideHTML(p) {
   `;
 }
 
+/**
+ * Carousel wiring: prev/next, dots, autoplay, hover pause.
+ */
 function wireCarousel() {
   const dots = Array.from(dotsEl.querySelectorAll("button"));
   const hero = document.getElementById("hero-carousel");
@@ -167,10 +198,13 @@ function wireCarousel() {
   startAuto();
 }
 
+/**
+ * Search handling.
+ */
 const searchForm = document.querySelector(".site-search");
 const searchInput = searchForm?.querySelector("input[name='q']");
 
-if (searchForm && grid) {
+if (searchForm && grid && searchInput) {
   searchForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -179,7 +213,7 @@ if (searchForm && grid) {
     if (!allProducts.length) return;
 
     if (!query) {
-      renderGrid(allProducts.slice(7));
+      renderGrid(allProducts);
       return;
     }
 

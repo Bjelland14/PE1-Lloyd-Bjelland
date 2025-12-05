@@ -1,31 +1,54 @@
+import { registerAccount } from "./api.js";
+
 const form = document.getElementById("register-form");
 const msg = document.getElementById("register-msg");
 
 if (form) {
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const name = document.getElementById("reg-name").value.trim();
-    const email = document.getElementById("reg-email").value.trim();
-    const pass = document.getElementById("reg-password").value.trim();
+    const nameInput = document.getElementById("reg-name");
+    const emailInput = document.getElementById("reg-email");
+    const passInput = document.getElementById("reg-password");
 
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const password = passInput.value.trim();
 
-    msg.className = "";
+    msg.className = "form-msg";
     msg.textContent = "";
+    nameInput.classList.remove("input-error");
+    emailInput.classList.remove("input-error");
+    passInput.classList.remove("input-error");
 
-    if (users.find((u) => u.email === email)) {
-      msg.className = "error-text";
-      msg.textContent = "Email already registered.";
+    if (!name || !email || !password) {
+      msg.classList.add("error-text");
+      msg.textContent = "Please fill in all fields.";
+      if (!name) nameInput.classList.add("input-error");
+      if (!email) emailInput.classList.add("input-error");
+      if (!password) passInput.classList.add("input-error");
       return;
     }
 
-    users.push({ name, email, password: pass });
-    localStorage.setItem("users", JSON.stringify(users));
+    const submitBtn = form.querySelector("button[type='submit']");
+    if (submitBtn) submitBtn.disabled = true;
 
-    msg.className = "success-text";
-    msg.textContent = "Registration successful! Redirecting...";
+    try {
+      await registerAccount({ name, email, password });
 
-    setTimeout(() => (location.href = "./login.html"), 1200);
+      msg.classList.add("success-text");
+      msg.textContent = "Account created! You can now log in.";
+
+      setTimeout(() => {
+        location.href = "./login.html";
+      }, 1000);
+    } catch (error) {
+      console.error("Register error:", error);
+      msg.classList.add("error-text");
+      msg.textContent =
+        error.message || "Registration failed. Please try again.";
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
   });
 }

@@ -6,6 +6,7 @@ function updateCartCount() {
 
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   const total = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+
   el.textContent = total > 0 ? `(${total})` : "";
 }
 
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const order = params.get("order");
 
   const line = document.getElementById("order-line");
+
   if (line && order) {
     line.textContent = `Your order number is ${order}. A confirmation has been sent to your email.`;
   } else if (line) {

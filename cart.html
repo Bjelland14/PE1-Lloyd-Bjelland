@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STAV — Cart</title>
 
+  <meta
+    name="description"
+    content="Review your STAV cart, adjust quantities, clear items, and proceed to checkout."
+  />
+
   <link rel="stylesheet" href="./css/base.css" />
   <link rel="stylesheet" href="./css/layout.css" />
   <link rel="stylesheet" href="./css/pages.css" />
@@ -17,37 +22,48 @@
   />
 </head>
 
-
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="./index.html">
-        <img src="./assets/STAVLOGO.png" alt="STAV" height="36" />
+      <a class="logo" href="./index.html" aria-label="Go to STAV home page">
+        <img src="./assets/STAVLOGO.png" alt="STAV logo" height="36" />
       </a>
 
-      <nav class="nav-links">
+      <nav class="nav-links" aria-label="Main navigation">
         <a href="./index.html" class="nav-btn">Home</a>
         <a href="./account/login.html" class="nav-btn">Login</a>
         <a href="./account/register.html" class="nav-btn">Register</a>
-        <a href="./cart.html" class="nav-btn">
-          🛒 Cart <span id="cart-count"></span>
+        <a href="./cart.html" class="nav-btn nav-btn--active">
+          🛒 Cart <span id="cart-count" aria-live="polite"></span>
         </a>
       </nav>
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" aria-labelledby="cart-heading">
     <section id="cart-section">
-      <h1>Your Cart</h1>
+      <h1 id="cart-heading">Your Cart</h1>
 
-      <div id="cart-items"></div>
+      <div
+        id="cart-items"
+        aria-live="polite"
+        aria-busy="false"
+      ></div>
 
       <div id="cart-summary">
+        <h2 class="visually-hidden">Cart summary</h2>
         <h3 id="cart-total">Total: 0 NOK</h3>
 
         <div class="cart-actions">
-          <button id="clear-cart" class="secondary">Clear Cart</button>
-          <a id="go-checkout" href="./checkout.html" class="primary-btn" aria-disabled="true">
+          <button id="clear-cart" class="secondary" type="button">
+            Clear Cart
+          </button>
+          <a
+            id="go-checkout"
+            href="./checkout.html"
+            class="primary-btn"
+            aria-disabled="true"
+          >
             Proceed to Checkout
           </a>
         </div>
@@ -66,7 +82,7 @@
       </div>
     </div>
   </footer>
- 
+
   <script type="module" src="./js/global.js"></script>
   <script type="module" src="./js/cart.js"></script>
 </body>

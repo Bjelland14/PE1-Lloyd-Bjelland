@@ -18,18 +18,30 @@ function seedDemoUser() {
   }
 }
 
+function safeParse(key) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    console.error(`Failed to parse localStorage key "${key}":`, e);
+    return null;
+  }
+}
+
 export function updateCartCount() {
   const el = document.getElementById("cart-count");
-  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  if (!el) return;
+
+  const cart = safeParse("cart") || [];
   const total = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
-  if (el) el.textContent = total > 0 ? `(${total})` : "";
+  el.textContent = total > 0 ? `(${total})` : "";
 }
 
 export function updateAuthButtons() {
   const nav = document.querySelector(".nav-links");
   if (!nav) return;
 
-  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser") || "null");
+  const loggedInUser = safeParse("loggedInUser");
 
   const oldLogout = nav.querySelector("#logout-btn");
   const oldWelcome = nav.querySelector("#welcome-msg");
@@ -68,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
   updateAuthButtons();
 
-  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser") || "null");
+  const loggedInUser = safeParse("loggedInUser");
   const banner = document.getElementById("welcome-banner");
 
   if (banner && loggedInUser) {
