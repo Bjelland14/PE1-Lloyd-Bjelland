@@ -1,24 +1,24 @@
  STAV – E-commerce Web Application
 
-A responsive front-end e-commerce web application built using **HTML, CSS, and JavaScript**, powered by an external API. Users can browse products, register, log in, add items to cart, and complete a checkout flow.
+A responsive front-end e-commerce web application built using HTML, CSS, and JavaScript, powered by an external API. Users can browse products, register, log in, add items to cart, and complete a checkout flow.
 
-This project was developed as **Project Exam 1** in the FED1 program.
+This project was developed as Project Exam 1 in the FED1 program.
 
 
 
  Live Demo & Links
 
-- **Live Website:**  
-[LEGG INN GITHUB PAGES LINK HER]
+- Live Website:  
+https://bjelland14.github.io/stav-ecommerce/
 
-- **GitHub Repository:**  
-[LEGG INN GITHUB REPO LINK HER]
+- GitHub Repository:  
+https://github.com/Bjelland14/stav-ecommerce
 
-- **Figma Style Guide:**  
-[LEGG INN FIGMA LINK HER]
+- Figma Style Guide: 
+https://www.figma.com/design/F5TUiz9v1mDqmux9YVLriu/LLOYD_EDWARD_BJELLAND_PE1_JAN25FT-?node-id=1-2&t=xInlVp1axSXSfLHr-1
 
-- **Project Planning Board:**  
-[LEGG INN GITHUB PROJECT BOARD LINK HER]
+- Project Planning Board:  
+https://github.com/users/Bjelland14/projects/10
 
 
 
@@ -26,11 +26,11 @@ This project was developed as **Project Exam 1** in the FED1 program.
 
 Use the following credentials to test the owner functionality:
 
-**Email:**  
+Email:  
 
 admin@stav.no
 
-**Password:**  
+Password:
 Admin1234
 
 
@@ -40,7 +40,7 @@ Admin1234
 
  Features
 
-- Product feed with **interactive carousel**
+- Product feed with interactive carousel
 - Product detail page with:
   - Price & discounted price
   - Rating & reviews
@@ -75,7 +75,7 @@ Admin1234
 
 
 
-##  Project Structure
+ Project Structure
 /index.html
 /product.html
 /cart.html
