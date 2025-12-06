@@ -1,3 +1,4 @@
+// home.js
 import { getProducts } from "./api.js";
 
 const grid = document.getElementById("products-grid");
@@ -35,7 +36,7 @@ let slides = [];
 
       dotsEl.innerHTML = heroProducts
         .map(
-          (_, i) =>
+          (_p, i) =>
             `<button type="button" ${
               i === 0 ? 'aria-current="true"' : ""
             } aria-label="Go to slide ${i + 1}"></button>`
@@ -49,15 +50,15 @@ let slides = [];
     if (categoryRow) {
       categoryRow.innerHTML = `
         <article class="category-card">
-          <h3>Tech & Gadgets</h3>
+          <h3>Tech &amp; Gadgets</h3>
           <p>Headphones, speakers, accessories and more.</p>
         </article>
         <article class="category-card">
-          <h3>Home & Lifestyle</h3>
+          <h3>Home &amp; Lifestyle</h3>
           <p>Decor, lighting and everyday favourites.</p>
         </article>
         <article class="category-card">
-          <h3>Beauty & Care</h3>
+          <h3>Beauty &amp; Care</h3>
           <p>Popular self-care and wellness picks.</p>
         </article>
         <article class="category-card">
@@ -70,8 +71,9 @@ let slides = [];
     if (statusEl) statusEl.textContent = "";
   } catch (err) {
     console.error(err);
-    if (statusEl)
+    if (statusEl) {
       statusEl.textContent = err.message || "Something went wrong.";
+    }
   }
 })();
 
@@ -113,10 +115,12 @@ function featuredCard(p) {
 
 function slideHTML(p) {
   const href = `./product.html?id=${p.id}`;
+  const imgUrl = p.image?.url || "./assets/placeholder.png"; // legg inn placeholder.png i /assets
+
   return `
     <article class="slide">
-      <img src="${p.image?.url}" alt="${p.image?.alt || p.title}">
       <div class="copy">
+        <p class="slide-tagline">Featured</p>
         <h2>${p.title}</h2>
         <p>${p.description || ""}</p>
         <div class="cta-row">
@@ -124,6 +128,7 @@ function slideHTML(p) {
           <a class="btn ghost" href="${href}">Find out more</a>
         </div>
       </div>
+      <img src="${imgUrl}" alt="${p.image?.alt || p.title}">
     </article>
   `;
 }
@@ -133,11 +138,18 @@ function wireCarousel() {
   const hero = document.getElementById("hero-carousel");
 
   function go(n) {
+    if (!slides.length) return;
+
     idx = (n + slides.length) % slides.length;
     track.style.transform = `translateX(-${idx * 100}%)`;
-    dots.forEach((d, i) =>
-      d.setAttribute("aria-current", i === idx ? "true" : "false")
-    );
+
+    dots.forEach((d, i) => {
+      if (i === idx) {
+        d.setAttribute("aria-current", "true");
+      } else {
+        d.removeAttribute("aria-current");
+      }
+    });
   }
 
   function next() {
@@ -149,10 +161,12 @@ function wireCarousel() {
   }
 
   let autoTimer;
+
   function startAuto() {
     stopAuto();
     autoTimer = setInterval(next, 5000);
   }
+
   function stopAuto() {
     if (autoTimer) clearInterval(autoTimer);
   }
@@ -180,5 +194,6 @@ function wireCarousel() {
   hero?.addEventListener("mouseenter", stopAuto);
   hero?.addEventListener("mouseleave", startAuto);
 
+  go(0);
   startAuto();
 }

@@ -1,7 +1,69 @@
+/* KORT / PRODUKTKORT */
 
+.card {
+  display: block;
+  border-radius: 12px;
+  padding: 1rem;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.card h3 {
+  font-size: 1rem;
+  margin: 0 0 0.25rem;
+}
+
+.card p {
+  margin: 0.1rem 0;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
+}
+
+/* Featured cards */
+
+.featured-card {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.featured-card img {
+  height: 120px;
+}
+
+.featured-info h3 {
+  margin: 0 0 0.25rem;
+}
+
+.featured-info .price {
+  margin: 0 0 0.25rem;
+}
+
+.featured-info .tagline {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* HERO / CAROUSELL */
 
 .hero {
-  margin: 2rem 0 2.5rem;     
+  margin: 2rem 0 2.5rem;
 }
 
 .carousel {
@@ -10,27 +72,72 @@
   border-radius: 18px;
   background: #111;
   color: #fff;
-  max-width: 1200px;         
-  margin: 0 auto;            
+  max-width: 1200px;
+  margin: 0 auto 2.5rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
 
-.track {
+/* Sporet som flyttes sideveis */
+.carousel .track {
   display: flex;
-  transition: transform 0.6s ease;
-  width: 100%;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
-.slide {
-  position: relative;
+/* Én slide = nøyaktig 100% bredde */
+.carousel .slide {
+  box-sizing: border-box;
   min-width: 100%;
   flex-shrink: 0;
+  position: relative;
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  align-items: center;
-  gap: 1rem;
+  align-items: stretch;
+  min-height: 420px;
 }
 
+/* Tekstblokk (venstre panel) */
+.slide .copy {
+  padding: 2.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  background: #000;
+}
+
+.slide-tagline {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.slide .copy h2 {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.slide .copy p {
+  opacity: 0.9;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 40ch;
+}
+
+.cta-row {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Bildeblokk (høyre panel) */
 .slide img {
   width: 100%;
   height: 100%;
@@ -38,33 +145,81 @@
   display: block;
 }
 
-.slide .copy {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
+/* PILER – kun i karousellen */
+.carousel .nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
   color: #fff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  border: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.8rem;
+  line-height: 1;
+  z-index: 10;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.slide h2 {
-  font-size: clamp(1.8rem, 3vw, 3rem);
-  line-height: 1.1;
-  margin: 0;
+.carousel .nav:hover {
+  background: rgba(0, 0, 0, 0.6);
+  transform: translateY(-50%) scale(1.05);
 }
 
-.slide p {
-  opacity: 0.9;
-  font-size: 1rem;
-  line-height: 1.5;
+.carousel .prev {
+  left: 12px;
 }
 
-.cta-row {
+.carousel .next {
+  right: 12px;
+}
+
+/* Dots */
+.carousel .dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 12px;
   display: flex;
-  gap: 0.75rem;
+  gap: 8px;
+  z-index: 5;
 }
 
+.carousel .dots button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  padding: 0;
+}
+
+.carousel .dots button[aria-current="true"] {
+  background: #fff;
+  transform: scale(1.3);
+}
+
+/* Mobil: stack tekst/bilde */
+@media (max-width: 900px) {
+  .carousel .slide {
+    grid-template-columns: 1fr;
+  }
+
+  .slide .copy {
+    order: 2;
+    padding: 1.75rem;
+  }
+
+  .slide img {
+    order: 1;
+    height: 280px;
+  }
+}
+
+/* KNAPPER */
 
 .btn {
   display: inline-flex;
@@ -96,70 +251,48 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+/* KATEGORIER */
 
-.nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.4);
+.categories {
+  margin: 2rem 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.category-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.category-card {
+  background: #111;
   color: #fff;
-  border: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1.8rem;
-  line-height: 1;
-  z-index: 10;
-  transition: background 0.3s ease, transform 0.2s ease;
+  padding: 1.25rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.nav:hover {
-  background: rgba(0, 0, 0, 0.6);
-  transform: translateY(-50%) scale(1.05);
+.category-card h3 {
+  margin: 0 0 0.35rem;
 }
 
-.nav.prev { left: 12px; }
-.nav.next { right: 12px; }
-
-
-.dots {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 12px;
-  display: flex;
-  gap: 8px;
-  z-index: 5;
-}
-
-.dots button {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 0;
-  background: rgba(255, 255, 255, 0.4);
-  cursor: pointer;
-}
-
-.dots button[aria-current="true"] {
-  background: #fff;
+.category-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
 }
 
 
-@media (max-width: 900px) {
-  .slide {
-    grid-template-columns: 1fr;
-  }
+.carousel {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-  .slide .copy {
-    order: 2;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 1.5rem;
-  }
-
-  .slide img {
-    height: 280px;
-    object-fit: cover;
-  }
+.hero {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }

@@ -549,3 +549,10 @@ button.primary.added {
     grid-template-columns: 1fr;
   }
 }
+
+
+.featured-products {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
