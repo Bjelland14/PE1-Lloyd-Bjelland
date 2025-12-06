@@ -1,4 +1,3 @@
-// home.js
 import { getProducts } from "./api.js";
 
 const grid = document.getElementById("products-grid");
@@ -27,10 +26,12 @@ let slides = [];
       featuredGrid.innerHTML = hotProducts.map(featuredCard).join("");
     }
 
+    
     if (grid) {
       grid.innerHTML = restProducts.map(card).join("");
     }
 
+    
     if (track && dotsEl && heroProducts.length) {
       track.innerHTML = heroProducts.map(slideHTML).join("");
 
@@ -47,6 +48,7 @@ let slides = [];
       wireCarousel();
     }
 
+    
     if (categoryRow) {
       categoryRow.innerHTML = `
         <article class="category-card">
@@ -76,6 +78,7 @@ let slides = [];
     }
   }
 })();
+
 
 function formatPrice(p) {
   const value =
@@ -113,9 +116,10 @@ function featuredCard(p) {
   `;
 }
 
+
 function slideHTML(p) {
   const href = `./product.html?id=${p.id}`;
-  const imgUrl = p.image?.url || "./assets/placeholder.png"; // legg inn placeholder.png i /assets
+  const imgUrl = p.image?.url || "./assets/placeholder.png";
 
   return `
     <article class="slide">
@@ -133,13 +137,14 @@ function slideHTML(p) {
   `;
 }
 
+
 function wireCarousel() {
   const dots = Array.from(dotsEl.querySelectorAll("button"));
   const hero = document.getElementById("hero-carousel");
 
-  function go(n) {
-    if (!slides.length) return;
+  if (!slides.length || !dots.length || !track) return;
 
+  function go(n) {
     idx = (n + slides.length) % slides.length;
     track.style.transform = `translateX(-${idx * 100}%)`;
 

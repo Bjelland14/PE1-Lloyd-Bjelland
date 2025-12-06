@@ -378,8 +378,8 @@ button.primary.added {
 }
 
 .featured-products {
-  max-width: 1200px;              /* samme bredde som resten */
-  margin: 2.5rem auto 3rem;       /* centrer seksjonen */
+  max-width: 1200px;              
+  margin: 2.5rem auto 3rem;       
   background: #0d0d0d;
   color: #fff;
   padding: 2.5rem 2rem;
@@ -387,7 +387,6 @@ button.primary.added {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
-/* Litt mer luft mellom heading og cards */
 .featured-products h2 {
   margin-bottom: 1.75rem;
 }
@@ -548,11 +547,4 @@ button.primary.added {
   .recommendations .grid {
     grid-template-columns: 1fr;
   }
-}
-
-
-.featured-products {
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
 }
