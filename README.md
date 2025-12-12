@@ -45,10 +45,10 @@ git clone https://github.com/Bjelland14/PE1-Lloyd-Bjelland.git
 Open the repository folder: 
 cd PE1-Lloyd-Bjelland
 
-nstall dependencies and start the development server:
+Install dependencies and start the development server:
 npm install
 npm run dev
 
--## Contact
+## Contact
 - LinkedIn: https://www.linkedin.com/in/lloyd-bjelland-355659399/
 - Email: lloydbjelland@gmail.com
