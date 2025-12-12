@@ -19,7 +19,7 @@ The goal of the project was to build a responsive front-end e-commerce website u
 ![Register page](assets/screenshots/Register-page.png)
 
 ### Cart
-![Cart page](assets/screenshots/Cart.png)
+![Cart page](assets/screenshots/cart.png)
 
 ### Checkout
 ![Checkout](assets/screenshots/Checkout-page.png)
