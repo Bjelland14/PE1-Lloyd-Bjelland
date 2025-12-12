@@ -1,101 +1,59 @@
- STAV – E-commerce Web Application
+ # PE1- Lloyd Bjelland
 
-A responsive front-end e-commerce web application built using HTML, CSS, and JavaScript, powered by an external API. Users can browse products, register, log in, add items to cart, and complete a checkout flow.
+ This project was created as Project Exam 1 in the Front-End Development program (FED1)
 
-This project was developed as Project Exam 1 in the FED1 program.
+The goal of the project was to build a responsive front-end e-commerce website usin HTML,CSS,and JavaScript, connected to an external API. Users can browse products, view product details, add items to a cart, and complete a checkout flow, and login and register an account.
 
+## Screenshots 📸
 
+### Homepage
+![Homepage](assets/screenshots/Homepage.png)
 
- Live Demo & Links
+### Product Page
+![Product page](assets/screenshots/Product-page.png)
 
-- Live Website:  
-https://bjelland14.github.io/stav-ecommerce/
+### Login
+![Login page](assets/screenshots/Login-page.png)
 
-- GitHub Repository:  
-https://github.com/Bjelland14/stav-ecommerce
+### Register
+![Register page](assets/screenshots/Register-page.png)
 
-- Figma Style Guide: 
-https://www.figma.com/design/F5TUiz9v1mDqmux9YVLriu/LLOYD_EDWARD_BJELLAND_PE1_JAN25FT-?node-id=1-2&t=xInlVp1axSXSfLHr-1
+### Cart
+![Cart page](assets/screenshots/Cart.png)
 
-- Project Planning Board:  
-https://github.com/users/Bjelland14/projects/10
+### Checkout
+![Checkout](assets/screenshots/Checkout-page.png)
 
+### Checkout Success
+![Checkout Success](assets/screenshots/Checkout-success.png)
 
-
- Admin / Owner Test User
-
-Use the following credentials to test the owner functionality:
-
-Email:  
-
-admin@stav.no
-
-Password:
-Admin1234
-
-
- This user can log in, add products to the cart, and complete checkout.
-
- Or create your own account.
-
- Features
-
-- Product feed with interactive carousel
-- Product detail page with:
-  - Price & discounted price
-  - Rating & reviews
-  - Tags
-  - Shareable product link
-- User authentication:
-  - Register
-  - Login
-  - Logout
-- Cart system:
-  - Add / remove products
-  - Quantity control
-  - Total price calculation
-- Checkout system:
-  - Delivery address form
-  - Payment method selection
-- Success page after checkout
-- Fully responsive (mobile & desktop)
-- Accessible & SEO-friendly
-
-
-
-  Tech Stack
+## Built With
 
 - HTML
 - CSS
-- JavaScript (ES Modules)
+- JavaScript
 - External REST API
-- GitHub Pages (deployment)
+- GitHub Pages
 
- No frameworks were used (as required).
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Bjelland14/PE1-Lloyd-Bjelland.git
+
+Open the repository folder: 
+cd PE1-Lloyd-Bjelland
+
+nstall dependencies and start the development server:
+npm install
+npm run dev
+
+## Contact
+
+- LinkedIn: https://www.linkedin.com/in/lloyd-bjelland-355659399/
+- Email: lloydbjelland@gmail.com
 
 
 
- Project Structure
-/index.html
-/product.html
-/cart.html
-/checkout.html
-/success.html
 
-/account/
-├── login.html
-└── register.html
-
-/css/
-├── base.css
-├── layout.css
-├── components.css
-└── pages.css
-
-/js/
-├── api.js
-├── global.js
-├── home.js
-├── product.js
-├── cart.js
-├── checkout.js
