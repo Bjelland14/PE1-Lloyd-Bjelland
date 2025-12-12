@@ -49,11 +49,6 @@ nstall dependencies and start the development server:
 npm install
 npm run dev
 
-## Contact
-
+-## Contact
 - LinkedIn: https://www.linkedin.com/in/lloyd-bjelland-355659399/
 - Email: lloydbjelland@gmail.com
-
-
-
-
